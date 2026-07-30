@@ -255,9 +255,26 @@
       </div>
 
       <div class="doc sched__map">
-        <div class="mapbox" data-fill>
-          <!-- ЗАМЕНИТЬ на iframe Яндекс.Карт с меткой (конструктор карт) -->
-          <p class="mapbox__ph">Схема проезда<span>Вставьте iframe Яндекс.Карт</span></p>
+        <!-- КАРТА.
+             Когда будет готов код Конструктора Яндекс.Карт — вставить сюда iframe
+             и удалить ссылку .mapbox__ph ниже. Обязательно оставить
+             loading="lazy" и убрать из кода конструктора width/height:
+             размер задаётся стилями, иначе поедет на телефоне.
+
+             <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A…&source=constructor"
+                     loading="lazy" title="Схема проезда к клинике"></iframe>
+        -->
+        <div class="mapbox">
+          <a class="mapbox__ph" data-fill
+             href="https://yandex.ru/maps/?text=Челябинская%20область,%20Коркино,%20улица%20Цвиллинга,%2028"
+             target="_blank" rel="noopener">
+            <svg class="mapbox__pin" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34">
+              <path d="M12 22s7-6.36 7-12A7 7 0 0 0 5 10c0 5.64 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <strong>Открыть в Яндекс.Картах</strong>
+            <span>г. Коркино, ул. Цвиллинга, 28</span>
+          </a>
         </div>
         <address class="addr">
           <p><strong>456550, Челябинская область, г. Коркино, ул. Цвиллинга, д. 28</strong></p>

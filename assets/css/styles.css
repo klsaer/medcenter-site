@@ -433,9 +433,25 @@ body.show-fill [data-fill] {
 
 .sched__map { overflow: hidden; display: flex; flex-direction: column; }
 .mapbox { aspect-ratio: 16 / 10; background: var(--bg-2); display: grid; place-items: center; border-bottom: 1px solid var(--line); }
+/* размер задаёт контейнер: у кода из конструктора Яндекса свои width/height, их надо убрать */
 .mapbox iframe { width: 100%; height: 100%; border: 0; display: block; }
-.mapbox__ph { display: flex; flex-direction: column; gap: 4px; text-align: center; color: var(--ink-3); font-weight: 600; font-size: .95rem; }
-.mapbox__ph span { font-weight: 400; font-size: .8rem; }
+
+/* Пока карта не вставлена — рабочая ссылка на Яндекс.Карты по адресу */
+.mapbox__ph {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  width: 100%; height: 100%;
+  justify-content: center; text-align: center;
+  color: var(--ink-2); text-decoration: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 34px 34px, 34px 34px;
+  transition: color .16s, background-color .16s;
+}
+.mapbox__ph:hover { color: var(--primary); background-color: color-mix(in srgb, var(--primary) 5%, transparent); }
+.mapbox__pin { color: var(--primary); margin-bottom: 2px; }
+.mapbox__ph strong { font-size: .97rem; font-weight: 650; }
+.mapbox__ph span { font-size: .84rem; color: var(--ink-3); }
 .addr { font-style: normal; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; font-size: .92rem; color: var(--ink-2); }
 .addr strong { color: var(--ink); font-size: 1rem; }
 
