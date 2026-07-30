@@ -613,6 +613,8 @@ body.show-fill [data-fill] {
 .org__c > div { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 10px; align-items: baseline; }
 .org__c dt { font-size: .76rem; color: var(--ink-3); font-weight: 600; }
 .org__c dd { font-size: .88rem; word-break: break-word; }
+/* пояснение под номером: что это за линия и когда работает */
+.org__note { font-size: .78rem; color: var(--ink-3); line-height: 1.4; display: inline-block; margin-top: 2px; }
 
 .appeal { padding: clamp(20px, 2.6vw, 30px); border-left: 3px solid var(--navy); }
 .steps { counter-reset: s; display: flex; flex-direction: column; gap: 20px; max-width: var(--prose); }
