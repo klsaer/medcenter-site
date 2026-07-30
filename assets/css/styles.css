@@ -526,12 +526,16 @@ body.show-fill [data-fill] {
 
 .price__empty { margin-top: 16px; padding: 18px; text-align: center; color: var(--ink-3); background: var(--surface-2); border: 1px dashed var(--line-2); border-radius: var(--r-sm); }
 
-.notes { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 22px; }
+/* max-width держит комфортную длину строки, когда карточка одна;
+   при добавлении второй сетка сама разложит их в колонки */
+.notes { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 22px; max-width: var(--prose); }
 .note { padding: 22px; display: flex; flex-direction: column; gap: 12px; }
 .note h3 { font-size: 1rem; }
 .note p { font-size: .91rem; color: var(--ink-2); }
 .note__doc { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--line-2); font-size: .85rem !important; }
 
+/* Готовый список с галочками. Сейчас в разметке не используется —
+   пригодится для перечислений при заполнении: <ul class="ticks"><li>… */
 .ticks { display: flex; flex-direction: column; gap: 8px; }
 .ticks li { position: relative; padding-left: 24px; font-size: .89rem; color: var(--ink-2); }
 .ticks li::before {
