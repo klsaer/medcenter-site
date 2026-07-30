@@ -432,26 +432,50 @@ body.show-fill [data-fill] {
 .hours__extra p { display: flex; flex-direction: column; gap: 3px; }
 
 .sched__map { overflow: hidden; display: flex; flex-direction: column; }
-.mapbox { aspect-ratio: 16 / 10; background: var(--bg-2); display: grid; place-items: center; border-bottom: 1px solid var(--line); }
-/* размер задаёт контейнер: у кода из конструктора Яндекса свои width/height, их надо убрать */
-.mapbox iframe { width: 100%; height: 100%; border: 0; display: block; }
-
-/* Пока карта не вставлена — рабочая ссылка на Яндекс.Карты по адресу */
-.mapbox__ph {
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  width: 100%; height: 100%;
-  justify-content: center; text-align: center;
-  color: var(--ink-2); text-decoration: none;
+/* Сетка на фоне видна, если карта не загрузилась (нет сети, блокировщик, CSP) —
+   вместо пустого белого прямоугольника */
+.mapbox {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background-color: var(--bg-2);
   background-image:
     linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 34px 34px, 34px 34px;
-  transition: color .16s, background-color .16s;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
 }
-.mapbox__ph:hover { color: var(--primary); background-color: color-mix(in srgb, var(--primary) 5%, transparent); }
-.mapbox__pin { color: var(--primary); margin-bottom: 2px; }
-.mapbox__ph strong { font-size: .97rem; font-weight: 650; }
-.mapbox__ph span { font-size: .84rem; color: var(--ink-3); }
+/* размер задаёт контейнер: у кода из конструктора Яндекса свои width/height, их надо убрать */
+.mapbox iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* Карта не должна перехватывать прокрутку страницы, пока по ней не щёлкнут */
+.mapbox:not(.is-active) iframe { pointer-events: none; }
+
+/* Прозрачный слой ловит щелчок, а подпись сидит в плотной плашке —
+   иначе текст сливается с подписями на карте */
+/* Плашка снизу, а не по центру: в центре метка клиники, её закрывать нельзя.
+   Отступ снизу — чтобы не наехать на копирайт Яндекса. */
+.mapbox__lock {
+  position: absolute; inset: 0;
+  display: grid; place-items: end center;
+  background: transparent; border: 0; cursor: pointer;
+  padding: 0 12px 30px;
+  transition: opacity .18s;
+}
+.mapbox__chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px; border-radius: 100px;
+  background: var(--surface); color: var(--ink);
+  font: 650 .88rem var(--f-sans);
+  border: 1px solid var(--line-2);
+  box-shadow: var(--shadow-md);
+  transition: color .16s, border-color .16s;
+}
+.mapbox__chip svg { color: var(--primary); flex: none; }
+.mapbox__lock:hover .mapbox__chip { color: var(--primary); border-color: var(--primary); }
+.mapbox.is-active .mapbox__lock { opacity: 0; pointer-events: none; }
+
+.addr__route { font-weight: 600; }
 .addr { font-style: normal; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; font-size: .92rem; color: var(--ink-2); }
 .addr strong { color: var(--ink); font-size: 1rem; }
 

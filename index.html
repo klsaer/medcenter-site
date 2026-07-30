@@ -255,30 +255,30 @@
       </div>
 
       <div class="doc sched__map">
-        <!-- КАРТА.
-             Когда будет готов код Конструктора Яндекс.Карт — вставить сюда iframe
-             и удалить ссылку .mapbox__ph ниже. Обязательно оставить
-             loading="lazy" и убрать из кода конструктора width/height:
-             размер задаётся стилями, иначе поедет на телефоне.
-
-             <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A…&source=constructor"
-                     loading="lazy" title="Схема проезда к клинике"></iframe>
-        -->
-        <div class="mapbox">
-          <a class="mapbox__ph" data-fill
-             href="https://yandex.ru/maps/?text=Челябинская%20область,%20Коркино,%20улица%20Цвиллинга,%2028"
-             target="_blank" rel="noopener">
-            <svg class="mapbox__pin" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34">
-              <path d="M12 22s7-6.36 7-12A7 7 0 0 0 5 10c0 5.64 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
-            </svg>
-            <strong>Открыть в Яндекс.Картах</strong>
-            <span>г. Коркино, ул. Цвиллинга, 28</span>
-          </a>
+        <!-- Карта из Конструктора Яндекс.Карт.
+             width/height из кода конструктора убраны намеренно — размер задаёт
+             .mapbox через aspect-ratio, иначе на телефоне карта вылезает за экран.
+             Карта не перехватывает прокрутку, пока по ней не щёлкнут (см. main.js). -->
+        <div class="mapbox" id="mapbox">
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A3217f3c1756a3c03fef91a4fe4f85633363dfd5b32227e24f68a290c96d11488&amp;source=constructor"
+            title="Схема проезда: Коркино, ул. Цвиллинга, 28"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <button type="button" class="mapbox__lock" id="mapUnlock">
+            <span class="mapbox__chip">
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="19" height="19">
+                <path d="M12 22s7-6.36 7-12A7 7 0 0 0 5 10c0 5.64 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/>
+              </svg>
+              Нажмите, чтобы двигать карту
+            </span>
+          </button>
         </div>
         <address class="addr">
           <p><strong>456550, Челябинская область, г. Коркино, ул. Цвиллинга, д. 28</strong></p>
           <p data-fill>Ориентир и парковка — дописать.</p>
+          <p><a class="addr__route" href="https://yandex.ru/maps/?text=Челябинская%20область,%20Коркино,%20улица%20Цвиллинга,%2028&amp;rtext=~" target="_blank" rel="noopener">Построить маршрут в Яндекс.Картах</a></p>
           <p><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a> · <a href="mailto:info@example.ru" data-fill>info@example.ru</a></p>
         </address>
       </div>

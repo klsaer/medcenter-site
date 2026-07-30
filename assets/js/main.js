@@ -261,6 +261,18 @@
     });
   })();
 
+  /* ---------- Карта: включаем взаимодействие только по щелчку ----------
+     Иначе на телефоне палец внутри карты тянет карту, а не страницу,
+     и посетитель застревает на этом блоке. */
+  (function map() {
+    var box = $('#mapbox'), btn = $('#mapUnlock');
+    if (!box || !btn) return;
+
+    btn.addEventListener('click', function () {
+      box.classList.add('is-active');
+    });
+  })();
+
   /* ---------- Год в подвале ---------- */
   (function year() {
     var el = $('#year');
