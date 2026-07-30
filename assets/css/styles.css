@@ -184,8 +184,15 @@ body.show-fill [data-fill] {
 .utilbar__in { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; padding-block: 7px; }
 .utilbar .mono { color: var(--primary-on); }
 .utilbar__hours { margin-left: auto; }
-.utilbar__tel { color: var(--primary-on); font-weight: 600; text-decoration: none; }
-.utilbar__tel:hover { text-decoration: underline; }
+/* вес не задаём: рядом стоят номер лицензии и время тем же моношрифтом,
+   полужирный выбивался бы из ряда. Что это ссылка — показывает подчёркивание */
+.utilbar__tel {
+  color: var(--primary-on);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--primary-on) 45%, transparent);
+  text-underline-offset: .2em;
+}
+.utilbar__tel:hover { text-decoration-color: currentColor; }
 @media (max-width: 720px) {
   .utilbar__lic { width: 100%; }
   .utilbar__hours { margin-left: 0; }
