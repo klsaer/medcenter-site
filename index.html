@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Медицинский центр — лицензия, врачи, прейскурант</title>
+<meta name="description" content="Официальная информация медицинской организации: лицензия и уставные документы, врачи и аккредитация, прейскурант по номенклатуре 804н, контакты контролирующих органов.">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230F5E56'/><path d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='%23fff'/></svg>">
+<script>
+  /* Применяем сохранённую тему до отрисовки, чтобы не мигало */
+  try {
+    var t = localStorage.getItem('mc-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#content">Перейти к содержанию</a>
+
+<!-- ============================================================
+     ШАБЛОН. Все данные ниже — заглушки.
+     Что заполнять — см. CONTENT.md. Места для заполнения помечены
+     атрибутом data-fill и подсвечиваются кнопкой «Показать заглушки».
+     ============================================================ -->
+<div class="template-banner" role="note">
+  <strong>Шаблон сайта.</strong> Все реквизиты, ФИО и цены — демонстрационные заглушки.
+  <button type="button" class="banner-btn" id="fillToggle" aria-pressed="false">Показать заглушки</button>
+</div>
+
+<!-- ── Утилитарная строка: то, что регулятор ищет первым делом ── -->
+<div class="utilbar">
+  <div class="wrap utilbar__in">
+    <p class="utilbar__lic">
+      Лицензия на медицинскую деятельность
+      <span class="mono" data-fill>Л041-00000-00/00000000</span>
+      от <time class="mono" datetime="2025-01-01" data-fill>01.01.2025</time>
+    </p>
+    <p class="utilbar__hours">Сегодня: <span class="mono" id="todayHours" data-fill>08:00–20:00</span></p>
+    <a class="utilbar__tel mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a>
+  </div>
+</div>
+
+<!-- ── Шапка ── -->
+<header class="masthead" id="masthead">
+  <div class="wrap masthead__in">
+
+    <a class="brand" href="#top" aria-label="На главную">
+      <!-- ЗАМЕНИТЬ на логотип в кривых (SVG). Высота задаётся CSS, viewBox сохранить пропорциональным. -->
+      <svg class="brand__mark" viewBox="0 0 40 40" role="img" aria-hidden="true" data-fill>
+        <rect x="0.75" y="0.75" width="38.5" height="38.5" rx="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M16.5 9h7v7.5H31v7h-7.5V31h-7v-7.5H9v-7h7.5z" fill="currentColor"/>
+      </svg>
+      <span class="brand__txt">
+        <span class="brand__name" data-fill>Название центра</span>
+        <span class="brand__sub" data-fill>Специализация · Город</span>
+      </span>
+    </a>
+
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="railnav">
+      <span class="burger__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="burger__label">Разделы</span>
+    </button>
+
+    <div class="masthead__act">
+      <button class="theme-btn" id="themeBtn" aria-label="Переключить тему" title="Переключить тему">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path class="ico-sun" d="M12 5V2m0 20v-3m7-7h3M2 12h3m12.07-5.07 2.12-2.12M4.81 19.19l2.12-2.12m0-10.14L4.81 4.81m14.38 14.38-2.12-2.12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/><circle class="ico-sun" cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" fill="none"/><path class="ico-moon" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/></svg>
+      </button>
+      <a class="btn btn--primary" href="#appointment">Записаться на приём</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout" id="content">
+
+  <!-- ── Левый рельс: индекс обязательных разделов ── -->
+  <nav class="rail" id="railnav" aria-label="Разделы сайта">
+    <p class="rail__cap">Обязательные разделы</p>
+    <ol class="rail__list">
+      <li><a href="#org"><span class="rail__n">00</span><span>Карточка организации</span></a></li>
+      <li><a href="#license"><span class="rail__n">01</span><span>Лицензия и документы</span></a></li>
+      <li><a href="#doctors"><span class="rail__n">02</span><span>Врачи и аккредитация</span></a></li>
+      <li><a href="#prices"><span class="rail__n">03</span><span>Прейскурант</span></a></li>
+      <li><a href="#oversight"><span class="rail__n">04</span><span>Жалобы и контроль</span></a></li>
+      <li><a href="#legal"><span class="rail__n">05</span><span>Правовая информация</span></a></li>
+    </ol>
+    <p class="rail__note">Состав разделов — по требованиям к сайтам медицинских организаций, действующим с 01.09.2025.</p>
+  </nav>
+
+  <main class="main" id="top">
+
+  <!-- ══════════ КАРТОЧКА ОРГАНИЗАЦИИ ══════════ -->
+  <section class="sec sec--org" id="org" aria-labelledby="org-h">
+    <div class="orgcard doc">
+      <div class="orgcard__body">
+        <p class="eyebrow">Медицинская организация</p>
+        <h1 class="orgcard__h" id="org-h" data-fill>Полное наименование медицинской организации</h1>
+        <p class="orgcard__lead" data-fill>
+          Одна–две строки о профиле центра: что лечим, для кого, с какого года работаем.
+          Без превосходных степеней и гарантий результата — это ограничено законом о рекламе.
+        </p>
+
+        <dl class="reqs">
+          <div class="reqs__i"><dt>Лицензия</dt><dd class="mono" data-fill>Л041-00000-00/00000000</dd></div>
+          <div class="reqs__i"><dt>Дата выдачи</dt><dd class="mono" data-fill>01.01.2025</dd></div>
+          <div class="reqs__i"><dt>ОГРН</dt><dd class="mono" data-fill>0000000000000</dd></div>
+          <div class="reqs__i"><dt>ИНН / КПП</dt><dd class="mono" data-fill>0000000000 / 000000000</dd></div>
+        </dl>
+
+        <div class="orgcard__act">
+          <a class="btn btn--primary" href="#appointment">Записаться на приём</a>
+          <a class="btn btn--ghost" href="#license">Лицензия и документы</a>
+        </div>
+      </div>
+
+      <!-- QR: обязателен с 01.09.2025 -->
+      <figure class="qr">
+        <div class="qr__seal">
+          <div class="qr__box">
+            <!-- ЗАМЕНИТЬ на реальный QR-код выписки из реестра лицензий -->
+            <img class="qr__img" src="assets/img/qr-placeholder.svg" alt="QR-код для перехода к выписке из реестра лицензий" width="150" height="150" data-fill>
+          </div>
+        </div>
+        <figcaption class="qr__cap">
+          <strong>Выписка из реестра лицензий</strong>
+          <span>Наведите камеру телефона или <a href="#" data-fill>откройте выписку</a> на портале Росздравнадзора</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══════════ БЛОК 1 ══════════ -->
+  <section class="sec" id="license" aria-labelledby="license-h">
+    <header class="sec__head">
+      <p class="eyebrow"><span class="eyebrow__n">01</span> Лицензия и документы</p>
+      <h2 class="sec__h" id="license-h">Разрешительные и уставные документы</h2>
+      <p class="sec__lead">Сведения о лицензии, копии учредительных документов, режим работы и схема проезда.</p>
+    </header>
+
+    <div class="doc lic">
+      <h3 class="lic__h">Лицензия на осуществление медицинской деятельности</h3>
+      <dl class="lic__grid">
+        <div class="lic__i"><dt>Номер лицензии</dt><dd class="mono lg" data-fill>Л041-00000-00/00000000</dd></div>
+        <div class="lic__i"><dt>Дата предоставления</dt><dd class="mono lg" data-fill>01.01.2025</dd></div>
+        <div class="lic__i lic__i--wide">
+          <dt>Лицензирующий орган (полное наименование)</dt>
+          <dd data-fill>Территориальный орган Федеральной службы по надзору в сфере здравоохранения по «субъект РФ»</dd>
+        </div>
+        <div class="lic__i lic__i--wide">
+          <dt>Виды работ и услуг по лицензии</dt>
+          <dd data-fill>Перечислить работы (услуги) в точных формулировках приложения к лицензии — например: при оказании первичной, в том числе доврачебной, врачебной и специализированной медико-санитарной помощи организуются и выполняются следующие работы (услуги): …</dd>
+        </div>
+      </dl>
+      <p class="lic__srok">
+        Срок действия лицензии — <strong>бессрочно</strong>. Актуальность сведений проверяется в едином реестре лицензий по QR-коду выше.
+      </p>
+    </div>
+
+    <h3 class="sub-h">Уставные документы</h3>
+    <ul class="docs">
+      <li class="docs__i">
+        <a href="#" data-fill>
+          <span class="docs__ico" aria-hidden="true"></span>
+          <span class="docs__txt"><strong>Устав</strong><span>Редакция от «дата»</span></span>
+          <span class="docs__meta mono">PDF · 0,0 МБ</span>
+        </a>
+      </li>
+      <li class="docs__i">
+        <a href="#" data-fill>
+          <span class="docs__ico" aria-hidden="true"></span>
+          <span class="docs__txt"><strong>Свидетельство ОГРН</strong><span class="mono">0000000000000</span></span>
+          <span class="docs__meta mono">PDF · 0,0 МБ</span>
+        </a>
+      </li>
+      <li class="docs__i">
+        <a href="#" data-fill>
+          <span class="docs__ico" aria-hidden="true"></span>
+          <span class="docs__txt"><strong>Свидетельство ИНН</strong><span class="mono">0000000000</span></span>
+          <span class="docs__meta mono">PDF · 0,0 МБ</span>
+        </a>
+      </li>
+      <li class="docs__i">
+        <a href="#" data-fill>
+          <span class="docs__ico" aria-hidden="true"></span>
+          <span class="docs__txt"><strong>Выписка из ЕГРЮЛ</strong><span>Актуальна на «дата»</span></span>
+          <span class="docs__meta mono">PDF · 0,0 МБ</span>
+        </a>
+      </li>
+      <li class="docs__i">
+        <a href="#" data-fill>
+          <span class="docs__ico" aria-hidden="true"></span>
+          <span class="docs__txt"><strong>Лицензия с приложением</strong><span>Все листы</span></span>
+          <span class="docs__meta mono">PDF · 0,0 МБ</span>
+        </a>
+      </li>
+    </ul>
+
+    <h3 class="sub-h" id="schedule">График работы и как добраться</h3>
+    <div class="sched">
+      <div class="doc sched__times">
+        <table class="hours">
+          <caption class="vh">График работы</caption>
+          <tbody>
+            <tr><th scope="row">Пн — Пт</th><td class="mono" data-fill>08:00 — 20:00</td></tr>
+            <tr><th scope="row">Суббота</th><td class="mono" data-fill>09:00 — 18:00</td></tr>
+            <tr><th scope="row">Воскресенье</th><td class="mono" data-fill>выходной</td></tr>
+          </tbody>
+        </table>
+        <div class="hours__extra">
+          <p><span class="lbl">Запись на приём</span><span class="mono" data-fill>Пн — Сб, 08:00 — 19:30</span></p>
+          <p><span class="lbl">Приём граждан руководителем</span><span class="mono" data-fill>Чт, 15:00 — 17:00, каб. 000</span></p>
+          <p><span class="lbl">Неотложная помощь</span><span class="mono" data-fill>по графику работы</span></p>
+        </div>
+      </div>
+
+      <div class="doc sched__map">
+        <div class="mapbox" data-fill>
+          <!-- ЗАМЕНИТЬ на iframe Яндекс.Карт с меткой (конструктор карт) -->
+          <p class="mapbox__ph">Схема проезда<span>Вставьте iframe Яндекс.Карт</span></p>
+        </div>
+        <address class="addr">
+          <p><strong data-fill>Город, улица, дом, помещение</strong></p>
+          <p data-fill>Ориентир: 3 минуты пешком от станции «Название». Парковка во дворе.</p>
+          <p><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a> · <a href="mailto:info@example.ru" data-fill>info@example.ru</a></p>
+        </address>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ БЛОК 2 ══════════ -->
+  <section class="sec" id="doctors" aria-labelledby="doctors-h">
+    <header class="sec__head">
+      <p class="eyebrow"><span class="eyebrow__n">02</span> Врачи и аккредитация</p>
+      <h2 class="sec__h" id="doctors-h">Специалисты</h2>
+      <p class="sec__lead">
+        По каждому врачу: образование, специальность по диплому и ординатуре, срок действия аккредитации.
+        Сертификаты указываются дополнительно и аккредитацию не заменяют.
+      </p>
+    </header>
+
+    <!-- Шаблон карточки: скопируйте <article class="dr"> нужное число раз -->
+    <div class="drs">
+
+      <article class="dr">
+        <div class="dr__top">
+          <div class="dr__ph" data-fill><span aria-hidden="true">ФИО</span></div>
+          <div class="dr__id">
+            <h3 class="dr__name" data-fill>Фамилия Имя Отчество</h3>
+            <p class="dr__pos" data-fill>Должность — например, врач-стоматолог-терапевт</p>
+            <p class="dr__exp"><span class="lbl">Стаж</span> <span class="mono" data-fill>00 лет</span></p>
+          </div>
+        </div>
+
+        <dl class="dr__facts">
+          <div><dt>Образование</dt><dd data-fill>Полное наименование вуза, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Специальность по диплому</dt><dd data-fill>Стоматология</dd></div>
+          <div><dt>Ординатура / интернатура</dt><dd data-fill>Стоматология терапевтическая, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Повышение квалификации</dt><dd data-fill>Тема, организация, <span class="mono">0000</span> г.</dd></div>
+        </dl>
+
+        <!-- data-until: дата окончания аккредитации в формате ГГГГ-ММ-ДД.
+             Статус и подпись считаются автоматически. -->
+        <p class="accr" data-until="2029-06-30">
+          <span class="accr__lbl">Аккредитация действует до</span>
+          <span class="accr__date mono">30.06.2029</span>
+          <span class="accr__chip">—</span>
+        </p>
+
+        <details class="certs">
+          <summary>Сертификаты и свидетельства <span class="certs__n mono">2</span></summary>
+          <ul>
+            <li data-fill>«Наименование», выдан «организация», <span class="mono">00.00.0000</span></li>
+            <li data-fill>«Наименование», выдан «организация», <span class="mono">00.00.0000</span></li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="dr">
+        <div class="dr__top">
+          <div class="dr__ph" data-fill><span aria-hidden="true">ФИО</span></div>
+          <div class="dr__id">
+            <h3 class="dr__name" data-fill>Фамилия Имя Отчество</h3>
+            <p class="dr__pos" data-fill>Должность — например, врач-стоматолог-хирург</p>
+            <p class="dr__exp"><span class="lbl">Стаж</span> <span class="mono" data-fill>00 лет</span></p>
+          </div>
+        </div>
+        <dl class="dr__facts">
+          <div><dt>Образование</dt><dd data-fill>Полное наименование вуза, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Специальность по диплому</dt><dd data-fill>Стоматология</dd></div>
+          <div><dt>Ординатура / интернатура</dt><dd data-fill>Стоматология хирургическая, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Повышение квалификации</dt><dd data-fill>Тема, организация, <span class="mono">0000</span> г.</dd></div>
+        </dl>
+        <p class="accr" data-until="2026-10-15">
+          <span class="accr__lbl">Аккредитация действует до</span>
+          <span class="accr__date mono">15.10.2026</span>
+          <span class="accr__chip">—</span>
+        </p>
+        <details class="certs">
+          <summary>Сертификаты и свидетельства <span class="certs__n mono">1</span></summary>
+          <ul>
+            <li data-fill>«Наименование», выдан «организация», <span class="mono">00.00.0000</span></li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="dr">
+        <div class="dr__top">
+          <div class="dr__ph" data-fill><span aria-hidden="true">ФИО</span></div>
+          <div class="dr__id">
+            <h3 class="dr__name" data-fill>Фамилия Имя Отчество</h3>
+            <p class="dr__pos" data-fill>Должность — например, врач-ортодонт</p>
+            <p class="dr__exp"><span class="lbl">Стаж</span> <span class="mono" data-fill>00 лет</span></p>
+          </div>
+        </div>
+        <dl class="dr__facts">
+          <div><dt>Образование</dt><dd data-fill>Полное наименование вуза, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Специальность по диплому</dt><dd data-fill>Стоматология</dd></div>
+          <div><dt>Ординатура / интернатура</dt><dd data-fill>Ортодонтия, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Повышение квалификации</dt><dd data-fill>Тема, организация, <span class="mono">0000</span> г.</dd></div>
+        </dl>
+        <p class="accr" data-until="2031-02-01">
+          <span class="accr__lbl">Аккредитация действует до</span>
+          <span class="accr__date mono">01.02.2031</span>
+          <span class="accr__chip">—</span>
+        </p>
+        <details class="certs">
+          <summary>Сертификаты и свидетельства <span class="certs__n mono">0</span></summary>
+          <ul><li data-fill>Заполнить или удалить блок</li></ul>
+        </details>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══════════ БЛОК 3 ══════════ -->
+  <section class="sec" id="prices" aria-labelledby="prices-h">
+    <header class="sec__head">
+      <p class="eyebrow"><span class="eyebrow__n">03</span> Прейскурант</p>
+      <h2 class="sec__h" id="prices-h">Стоимость платных медицинских услуг</h2>
+      <p class="sec__lead">
+        Услуги приведены по номенклатуре медицинских услуг (приказ Минздрава России № 804н).
+        Цена указана за одну услугу в рублях. Формулировки «от …» не применяются.
+      </p>
+    </header>
+
+    <div class="pricetools">
+      <label class="search">
+        <span class="vh">Поиск по услугам</span>
+        <input type="search" id="priceSearch" placeholder="Поиск по названию или коду 804н" autocomplete="off">
+      </label>
+      <p class="pricetools__count" id="priceCount" aria-live="polite"></p>
+    </div>
+
+    <div class="tablewrap">
+      <table class="price">
+        <caption class="vh">Прейскурант на платные медицинские услуги</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="price__c-code">Код 804н</th>
+            <th scope="col">Наименование услуги</th>
+            <th scope="col" class="price__c-sum">Цена, ₽</th>
+          </tr>
+        </thead>
+
+        <tbody data-class="063">
+          <tr class="price__grp"><th colspan="3" scope="colgroup"><span class="mono">Класс 063</span> «Наименование класса услуг»</th></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+        </tbody>
+
+        <tbody data-class="064">
+          <tr class="price__grp"><th colspan="3" scope="colgroup"><span class="mono">Класс 064</span> «Наименование класса услуг»</th></tr>
+          <tr><td class="mono" data-fill>B00.000.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+          <tr><td class="mono" data-fill>B00.000.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+        </tbody>
+
+        <tbody data-class="065">
+          <tr class="price__grp"><th colspan="3" scope="colgroup"><span class="mono">Класс 065</span> «Наименование класса услуг»</th></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+        </tbody>
+
+        <tbody data-class="066">
+          <tr class="price__grp"><th colspan="3" scope="colgroup"><span class="mono">Класс 066</span> «Наименование класса услуг»</th></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+        </tbody>
+
+        <tbody data-class="067">
+          <tr class="price__grp"><th colspan="3" scope="colgroup"><span class="mono">Класс 067</span> «Наименование класса услуг»</th></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+          <tr><td class="mono" data-fill>A00.00.000</td><td data-fill>Наименование услуги строго по номенклатуре</td><td class="mono num" data-fill>0 000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="price__empty" id="priceEmpty" hidden>По запросу ничего не найдено. Уточните название услуги или код.</p>
+
+    <div class="notes">
+      <div class="doc note">
+        <h3>Сроки оказания платных услуг</h3>
+        <p data-fill>
+          Срок ожидания оказания платной медицинской услуги — не более <strong>14 рабочих дней</strong> со дня заключения
+          договора, за исключением высокотехнологичной медицинской помощи (ВМП).
+          Конкретный срок фиксируется в договоре.
+        </p>
+        <p class="note__doc">
+          Прейскурант, утверждённый руководителем: <a href="#" data-fill>скачать PDF</a> ·
+          действует с <time class="mono" datetime="2026-01-01" data-fill>01.01.2026</time>
+        </p>
+      </div>
+
+      <div class="doc note">
+        <h3>Помощь по ОМС</h3>
+        <p data-fill>Если организация работает в системе ОМС — перечислите виды помощи, оказываемой бесплатно, и оставьте контакты страховых компаний. Если ОМС нет — удалите этот блок.</p>
+        <ul class="ticks">
+          <li data-fill>Вид медицинской помощи по территориальной программе ОМС</li>
+          <li data-fill>Вид медицинской помощи по территориальной программе ОМС</li>
+        </ul>
+        <p class="note__doc">Страховые медицинские организации и ТФОМС — <a href="#oversight">в разделе 04</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ БЛОК 4 ══════════ -->
+  <section class="sec" id="oversight" aria-labelledby="oversight-h">
+    <header class="sec__head">
+      <p class="eyebrow"><span class="eyebrow__n">04</span> Жалобы и контроль</p>
+      <h2 class="sec__h" id="oversight-h">Куда обратиться с жалобой</h2>
+      <p class="sec__lead">Контакты контролирующих органов, страховых организаций и порядок досудебного обжалования.</p>
+    </header>
+
+    <div class="orgs">
+      <article class="doc org">
+        <p class="org__kind">Надзор в сфере здравоохранения</p>
+        <h3 class="org__h" data-fill>Территориальный орган Росздравнадзора по «субъект РФ»</h3>
+        <dl class="org__c">
+          <div><dt>Адрес</dt><dd data-fill>индекс, город, улица, дом</dd></div>
+          <div><dt>Телефон</dt><dd><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></dd></div>
+          <div><dt>Сайт</dt><dd><a href="#" data-fill>адрес сайта</a></dd></div>
+          <div><dt>Горячая линия</dt><dd><a class="mono" href="tel:88005500035" data-fill>8 800 000-00-00</a></dd></div>
+        </dl>
+      </article>
+
+      <article class="doc org">
+        <p class="org__kind">Санитарно-эпидемиологический надзор</p>
+        <h3 class="org__h" data-fill>Управление Роспотребнадзора по «субъект РФ»</h3>
+        <dl class="org__c">
+          <div><dt>Адрес</dt><dd data-fill>индекс, город, улица, дом</dd></div>
+          <div><dt>Телефон</dt><dd><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></dd></div>
+          <div><dt>Сайт</dt><dd><a href="#" data-fill>адрес сайта</a></dd></div>
+          <div><dt>Горячая линия</dt><dd><a class="mono" href="tel:88005550990" data-fill>8 800 000-00-00</a></dd></div>
+        </dl>
+      </article>
+
+      <article class="doc org">
+        <p class="org__kind">Орган управления здравоохранением</p>
+        <h3 class="org__h" data-fill>Министерство (департамент) здравоохранения «субъект РФ»</h3>
+        <dl class="org__c">
+          <div><dt>Адрес</dt><dd data-fill>индекс, город, улица, дом</dd></div>
+          <div><dt>Телефон</dt><dd><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></dd></div>
+          <div><dt>Сайт</dt><dd><a href="#" data-fill>адрес сайта</a></dd></div>
+          <div><dt>Приём обращений</dt><dd data-fill>электронная приёмная / часы приёма</dd></div>
+        </dl>
+      </article>
+
+      <article class="doc org">
+        <p class="org__kind">Обязательное медицинское страхование</p>
+        <h3 class="org__h" data-fill>ТФОМС «субъект РФ»</h3>
+        <dl class="org__c">
+          <div><dt>Адрес</dt><dd data-fill>индекс, город, улица, дом</dd></div>
+          <div><dt>Телефон</dt><dd><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></dd></div>
+          <div><dt>Сайт</dt><dd><a href="#" data-fill>адрес сайта</a></dd></div>
+          <div><dt>Страховые организации</dt><dd data-fill>перечислить СМО и их телефоны</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="doc appeal">
+      <h3 class="sub-h sub-h--flush">Порядок досудебного обжалования</h3>
+      <ol class="steps">
+        <li>
+          <h4>Обращение в клинику</h4>
+          <p data-fill>Устно администратору или письменно на имя руководителя: лично, по почте «адрес» либо на e-mail «адрес». Срок рассмотрения — не более 30 календарных дней со дня регистрации обращения.</p>
+        </li>
+        <li>
+          <h4>Врачебная комиссия</h4>
+          <p data-fill>При несогласии с качеством помощи вопрос выносится на врачебную комиссию организации. Пациент вправе присутствовать и получить копию заключения.</p>
+        </li>
+        <li>
+          <h4>Страховая организация или ТФОМС</h4>
+          <p data-fill>Для помощи по ОМС — обращение в свою страховую медицинскую организацию, которая проводит экспертизу качества помощи. Контакты указаны выше.</p>
+        </li>
+        <li>
+          <h4>Контролирующие органы</h4>
+          <p data-fill>Росздравнадзор, Роспотребнадзор, орган управления здравоохранением региона — лично, почтой или через электронную приёмную на официальном сайте.</p>
+        </li>
+        <li>
+          <h4>Суд</h4>
+          <p data-fill>Досудебный порядок не лишает права обратиться в суд в любой момент, в том числе с требованием о возмещении вреда и компенсации морального вреда.</p>
+        </li>
+      </ol>
+      <p class="appeal__book">
+        Книга отзывов и предложений находится <span data-fill>на стойке администратора</span>.
+        Электронная форма обращения: <a href="#appointment">форма обратной связи</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════ БЛОК 5 ══════════ -->
+  <section class="sec" id="legal" aria-labelledby="legal-h">
+    <header class="sec__head">
+      <p class="eyebrow"><span class="eyebrow__n">05</span> Правовая информация</p>
+      <h2 class="sec__h" id="legal-h">Документы и права пациента</h2>
+      <p class="sec__lead">Локальные документы организации и нормативные акты, регулирующие оказание медицинской помощи.</p>
+    </header>
+
+    <h3 class="sub-h">Документы организации</h3>
+    <ul class="docs docs--two">
+      <li class="docs__i"><a href="#" data-fill><span class="docs__ico" aria-hidden="true"></span><span class="docs__txt"><strong>Договор на оказание платных медицинских услуг</strong><span>Типовая форма</span></span><span class="docs__meta mono">PDF</span></a></li>
+      <li class="docs__i"><a href="#" data-fill><span class="docs__ico" aria-hidden="true"></span><span class="docs__txt"><strong>Правила оказания платных медицинских услуг</strong><span>Утверждены «дата»</span></span><span class="docs__meta mono">PDF</span></a></li>
+      <li class="docs__i"><a href="#" data-fill><span class="docs__ico" aria-hidden="true"></span><span class="docs__txt"><strong>Правила внутреннего распорядка для пациентов</strong><span>Утверждены «дата»</span></span><span class="docs__meta mono">PDF</span></a></li>
+      <li class="docs__i"><a href="#" data-fill><span class="docs__ico" aria-hidden="true"></span><span class="docs__txt"><strong>Политика обработки персональных данных</strong><span>Редакция от «дата»</span></span><span class="docs__meta mono">PDF</span></a></li>
+      <li class="docs__i"><a href="#" data-fill><span class="docs__ico" aria-hidden="true"></span><span class="docs__txt"><strong>Согласие на обработку персональных данных</strong><span>Форма</span></span><span class="docs__meta mono">PDF</span></a></li>
+      <li class="docs__i"><a href="#" data-fill><span class="docs__ico" aria-hidden="true"></span><span class="docs__txt"><strong>Информированное добровольное согласие</strong><span>Формы по видам вмешательств</span></span><span class="docs__meta mono">PDF</span></a></li>
+    </ul>
+
+    <h3 class="sub-h">Права пациента и порядок получения помощи</h3>
+    <div class="faq">
+      <details class="qa">
+        <summary>Права и обязанности пациента</summary>
+        <div class="qa__b" data-fill>
+          <p>Кратко изложите права: выбор врача, информация о состоянии здоровья, облегчение боли, врачебная тайна, отказ от вмешательства, доступ к медицинской документации, возмещение вреда. Рядом — обязанности: соблюдать режим лечения и правила внутреннего распорядка.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Получение медицинской документации и её копий</summary>
+        <div class="qa__b" data-fill>
+          <p>Опишите порядок: письменное заявление на имя руководителя, срок подготовки, где и как получить выписку или копию медицинской карты, кто может получить документы за пациента.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Налоговый вычет за лечение</summary>
+        <div class="qa__b" data-fill>
+          <p>Опишите, как получить справку об оплате медицинских услуг для налоговых органов: куда обратиться, какие документы нужны, срок изготовления. Укажите, что справка формируется по утверждённой форме.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Обработка персональных данных</summary>
+        <div class="qa__b" data-fill>
+          <p>Укажите оператора персональных данных, цели обработки, срок хранения и порядок отзыва согласия. Дайте ссылку на полную политику.</p>
+        </div>
+      </details>
+    </div>
+
+    <h3 class="sub-h">Нормативные акты</h3>
+    <ul class="laws">
+      <li data-fill><span class="mono">№ 323-ФЗ</span> Об основах охраны здоровья граждан в Российской Федерации</li>
+      <li data-fill><span class="mono">№ 2300-1</span> О защите прав потребителей</li>
+      <li data-fill><span class="mono">№ 152-ФЗ</span> О персональных данных</li>
+      <li data-fill><span class="mono">№ 326-ФЗ</span> Об обязательном медицинском страховании в Российской Федерации</li>
+      <li data-fill><span class="mono">№ 804н</span> Об утверждении номенклатуры медицинских услуг</li>
+      <li data-fill><span class="mono">ПП РФ</span> Правила предоставления медицинскими организациями платных медицинских услуг</li>
+    </ul>
+    <p class="laws__note">Проверьте актуальные редакции и точные реквизиты каждого акта перед публикацией — список приведён как ориентир.</p>
+  </section>
+
+  <!-- ══════════ ЗАПИСЬ ══════════ -->
+  <section class="sec sec--cta" id="appointment" aria-labelledby="app-h">
+    <div class="doc cta">
+      <div class="cta__txt">
+        <h2 class="cta__h" id="app-h">Записаться на приём</h2>
+        <p data-fill>Оставьте контакты — администратор перезвонит в рабочее время и подберёт удобное время. Или позвоните напрямую.</p>
+        <p class="cta__tel"><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></p>
+      </div>
+
+      <form class="form" id="appForm" novalidate>
+        <label class="fld">
+          <span class="fld__l">Ваше имя</span>
+          <input type="text" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
+        </label>
+        <label class="fld">
+          <span class="fld__l">Телефон</span>
+          <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__">
+        </label>
+        <label class="fld">
+          <span class="fld__l">Комментарий <em>— необязательно</em></span>
+          <textarea name="msg" rows="3" placeholder="Специалист, удобное время"></textarea>
+        </label>
+        <label class="chk">
+          <input type="checkbox" name="agree" required>
+          <span>Я согласен на обработку персональных данных и ознакомлен с <a href="#legal">политикой</a></span>
+        </label>
+        <button class="btn btn--primary btn--full" type="submit">Отправить заявку</button>
+        <p class="form__status" id="formStatus" role="status"></p>
+        <p class="form__hint">Форма демонстрационная — подключите отправку на почту или в CRM.</p>
+      </form>
+    </div>
+  </section>
+
+  </main>
+</div>
+
+<!-- ══════════ ПОДВАЛ ══════════ -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__col foot__col--brand">
+      <p class="foot__name" data-fill>Полное наименование медицинской организации</p>
+      <p class="foot__req">
+        <span data-fill>ОГРН <span class="mono">0000000000000</span></span> ·
+        <span data-fill>ИНН <span class="mono">0000000000</span></span><br>
+        <span data-fill>Юридический адрес: индекс, город, улица, дом</span>
+      </p>
+      <p class="foot__req" data-fill>Лицензия <span class="mono">Л041-00000-00/00000000</span> от <span class="mono">01.01.2025</span>, выдана «полное наименование лицензирующего органа»</p>
+    </div>
+
+    <nav class="foot__col" aria-label="Разделы">
+      <p class="foot__cap">Разделы</p>
+      <ul>
+        <li><a href="#license">Лицензия и документы</a></li>
+        <li><a href="#doctors">Врачи и аккредитация</a></li>
+        <li><a href="#prices">Прейскурант</a></li>
+        <li><a href="#oversight">Жалобы и контроль</a></li>
+        <li><a href="#legal">Правовая информация</a></li>
+      </ul>
+    </nav>
+
+    <div class="foot__col">
+      <p class="foot__cap">Контакты</p>
+      <ul>
+        <li><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></li>
+        <li><a href="mailto:info@example.ru" data-fill>info@example.ru</a></li>
+        <li data-fill>Город, улица, дом</li>
+        <li class="mono" data-fill>Пн–Пт 08:00–20:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap foot__legal">
+    <!-- Если понадобится вернуть предупреждение о противопоказаниях — стиль .warn на месте:
+         <p class="warn">Имеются противопоказания. Необходима консультация специалиста.</p> -->
+    <p class="foot__copy">© <span id="year">2026</span> <span data-fill>Наименование организации</span></p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

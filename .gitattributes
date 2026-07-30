@@ -1,0 +1,8 @@
+# В репозитории — всегда LF, в рабочей копии Windows — CRLF
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
+*.woff  binary
+*.woff2 binary

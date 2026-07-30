@@ -1,0 +1,15 @@
+# сборка — генерируется командой `node build.js`
+dist/
+
+# зависимостей у проекта нет, но на всякий случай
+node_modules/
+
+# системное
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# редакторы
+.vscode/
+.idea/
+*.swp
