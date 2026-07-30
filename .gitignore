@@ -13,3 +13,6 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# исходники от клиента (копия выписки лежит в assets/docs)
+Лицензия с qr/

@@ -382,6 +382,20 @@ body.show-fill [data-fill] {
 .lic__grid dt { font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 700; margin-bottom: 5px; }
 .lic__grid dd { color: var(--ink); max-width: var(--prose); }
 .lic__grid .lg { font-size: 1.06rem; font-weight: 600; }
+.lic__short { color: var(--ink-3); font-size: .88rem; }
+
+/* адрес места осуществления деятельности + перечень работ по нему */
+.lic__addr { font-weight: 650; margin-top: 14px; }
+.lic__grid dd > .lic__addr:first-child { margin-top: 0; }
+.lic__note { font-size: .87rem; color: var(--ink-2); margin-top: 4px; }
+.lic__works { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.lic__works li {
+  font-size: .86rem; font-weight: 600;
+  background: var(--navy-soft); color: var(--navy);
+  border: 1px solid color-mix(in srgb, var(--navy) 22%, transparent);
+  border-radius: 100px; padding: 4px 12px;
+}
+
 .lic__srok {
   margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--line-2);
   font-size: .9rem; color: var(--ink-2);

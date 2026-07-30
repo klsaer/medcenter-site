@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Медицинский центр — лицензия, врачи, прейскурант</title>
-<meta name="description" content="Официальная информация медицинской организации: лицензия и уставные документы, врачи и аккредитация, прейскурант по номенклатуре 804н, контакты контролирующих органов.">
+<title>Стоматологическая клиника Матвеева — Коркино | лицензия, врачи, прейскурант</title>
+<meta name="description" content="ООО «Стоматологическая клиника Матвеева», г. Коркино, ул. Цвиллинга, 28. Лицензия Л041-01024-74/00379054, врачи и аккредитация, прейскурант, контакты контролирующих органов.">
 <link rel="stylesheet" href="assets/css/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230F5E56'/><path d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='%23fff'/></svg>">
 <script>
@@ -25,7 +25,8 @@
      атрибутом data-fill и подсвечиваются кнопкой «Показать заглушки».
      ============================================================ -->
 <div class="template-banner" role="note">
-  <strong>Шаблон сайта.</strong> Все реквизиты, ФИО и цены — демонстрационные заглушки.
+  <strong>Сайт в работе.</strong> Данные о лицензии и реквизиты — настоящие, из выписки от 30.07.2026.
+  Врачи, цены, график и контакты — заглушки.
   <button type="button" class="banner-btn" id="fillToggle" aria-pressed="false">Показать заглушки</button>
 </div>
 
@@ -34,8 +35,8 @@
   <div class="wrap utilbar__in">
     <p class="utilbar__lic">
       Лицензия на медицинскую деятельность
-      <span class="mono" data-fill>Л041-00000-00/00000000</span>
-      от <time class="mono" datetime="2025-01-01" data-fill>01.01.2025</time>
+      <span class="mono">Л041-01024-74/00379054</span>
+      от <time class="mono" datetime="2014-08-22">22.08.2014</time>
     </p>
     <p class="utilbar__hours">Сегодня: <span class="mono" id="todayHours" data-fill>08:00–20:00</span></p>
     <a class="utilbar__tel mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a>
@@ -53,8 +54,8 @@
         <path d="M16.5 9h7v7.5H31v7h-7.5V31h-7v-7.5H9v-7h7.5z" fill="currentColor"/>
       </svg>
       <span class="brand__txt">
-        <span class="brand__name" data-fill>Название центра</span>
-        <span class="brand__sub" data-fill>Специализация · Город</span>
+        <span class="brand__name">Клиника Матвеева</span>
+        <span class="brand__sub">Стоматология · Коркино</span>
       </span>
     </a>
 
@@ -95,17 +96,17 @@
     <div class="orgcard doc">
       <div class="orgcard__body">
         <p class="eyebrow">Медицинская организация</p>
-        <h1 class="orgcard__h" id="org-h" data-fill>Полное наименование медицинской организации</h1>
+        <h1 class="orgcard__h" id="org-h">Стоматологическая клиника Матвеева</h1>
         <p class="orgcard__lead" data-fill>
-          Одна–две строки о профиле центра: что лечим, для кого, с какого года работаем.
+          Одна–две строки о профиле клиники: что лечим, для кого, с какого года работаем.
           Без превосходных степеней и гарантий результата — это ограничено законом о рекламе.
         </p>
 
         <dl class="reqs">
-          <div class="reqs__i"><dt>Лицензия</dt><dd class="mono" data-fill>Л041-00000-00/00000000</dd></div>
-          <div class="reqs__i"><dt>Дата выдачи</dt><dd class="mono" data-fill>01.01.2025</dd></div>
-          <div class="reqs__i"><dt>ОГРН</dt><dd class="mono" data-fill>0000000000000</dd></div>
-          <div class="reqs__i"><dt>ИНН / КПП</dt><dd class="mono" data-fill>0000000000 / 000000000</dd></div>
+          <div class="reqs__i"><dt>Лицензия</dt><dd class="mono">Л041-01024-74/00379054</dd></div>
+          <div class="reqs__i"><dt>Дата предоставления</dt><dd class="mono">22.08.2014</dd></div>
+          <div class="reqs__i"><dt>ОГРН</dt><dd class="mono">1127412000374</dd></div>
+          <div class="reqs__i"><dt>ИНН</dt><dd class="mono">7412016429</dd></div>
         </dl>
 
         <div class="orgcard__act">
@@ -115,16 +116,21 @@
       </div>
 
       <!-- QR: обязателен с 01.09.2025 -->
+      <!-- QR собран из выписки (объект-изображение в PDF), ведёт в реестр Росздравнадзора -->
       <figure class="qr">
         <div class="qr__seal">
           <div class="qr__box">
-            <!-- ЗАМЕНИТЬ на реальный QR-код выписки из реестра лицензий -->
-            <img class="qr__img" src="assets/img/qr-placeholder.svg" alt="QR-код для перехода к выписке из реестра лицензий" width="150" height="150" data-fill>
+            <a href="https://roszdravnadzor.gov.ru/services/licenses?qrguid=1a8647a8f1d9242dd02195039e0ec1fc"
+               target="_blank" rel="noopener">
+              <img class="qr__img" src="assets/img/qr-license.svg"
+                   alt="QR-код для перехода к выписке из реестра лицензий на портале Росздравнадзора"
+                   width="150" height="150">
+            </a>
           </div>
         </div>
         <figcaption class="qr__cap">
           <strong>Выписка из реестра лицензий</strong>
-          <span>Наведите камеру телефона или <a href="#" data-fill>откройте выписку</a> на портале Росздравнадзора</span>
+          <span>Наведите камеру телефона или <a href="https://roszdravnadzor.gov.ru/services/licenses?qrguid=1a8647a8f1d9242dd02195039e0ec1fc" target="_blank" rel="noopener">откройте выписку</a> на портале Росздравнадзора</span>
         </figcaption>
       </figure>
     </div>
@@ -141,24 +147,65 @@
     <div class="doc lic">
       <h3 class="lic__h">Лицензия на осуществление медицинской деятельности</h3>
       <dl class="lic__grid">
-        <div class="lic__i"><dt>Номер лицензии</dt><dd class="mono lg" data-fill>Л041-00000-00/00000000</dd></div>
-        <div class="lic__i"><dt>Дата предоставления</dt><dd class="mono lg" data-fill>01.01.2025</dd></div>
+        <div class="lic__i"><dt>Номер лицензии</dt><dd class="mono lg">Л041-01024-74/00379054</dd></div>
+        <div class="lic__i"><dt>Дата предоставления</dt><dd class="mono lg">22.08.2014</dd></div>
+        <div class="lic__i"><dt>Статус</dt><dd><strong>Действует</strong></dd></div>
+        <div class="lic__i"><dt>Приказ лицензирующего органа</dt><dd class="mono">№ 239-УЛ от 26.02.2022</dd></div>
         <div class="lic__i lic__i--wide">
-          <dt>Лицензирующий орган (полное наименование)</dt>
-          <dd data-fill>Территориальный орган Федеральной службы по надзору в сфере здравоохранения по «субъект РФ»</dd>
+          <dt>Наименование лицензиата</dt>
+          <dd>Общество с ограниченной ответственностью «Стоматологическая клиника Матвеева»<br>
+            <span class="lic__short">сокращённо — ООО «Стоматологическая клиника Матвеева»</span></dd>
         </div>
         <div class="lic__i lic__i--wide">
-          <dt>Виды работ и услуг по лицензии</dt>
-          <dd data-fill>Перечислить работы (услуги) в точных формулировках приложения к лицензии — например: при оказании первичной, в том числе доврачебной, врачебной и специализированной медико-санитарной помощи организуются и выполняются следующие работы (услуги): …</dd>
+          <dt>Лицензирующий орган (полное наименование)</dt>
+          <dd>Министерство здравоохранения Челябинской области</dd>
+        </div>
+        <div class="lic__i lic__i--wide">
+          <dt>Лицензируемый вид деятельности</dt>
+          <dd>Медицинская деятельность (за исключением указанной деятельности, осуществляемой
+            медицинскими организациями и другими организациями, входящими в частную систему
+            здравоохранения, на территории инновационного центра «Сколково»)</dd>
+        </div>
+        <div class="lic__i lic__i--wide">
+          <dt>Адрес места осуществления деятельности и выполняемые работы (услуги)</dt>
+          <dd>
+            <p class="lic__addr">456550, Челябинская область, г. Коркино, ул. Цвиллинга, дом 28,
+              нежилое помещение 27</p>
+            <p class="lic__note">Приказ 866н. При оказании первичной медико-санитарной помощи
+              организуются и выполняются следующие работы (услуги): при оказании первичной
+              доврачебной медико-санитарной помощи в амбулаторных условиях по:</p>
+            <ul class="lic__works">
+              <li>сестринскому делу</li>
+              <li>стоматологии</li>
+            </ul>
+
+            <p class="lic__addr">456550, Челябинская область, г. Коркино, ул. Цвиллинга, д. 28,
+              нежилое здание № 27 — офис</p>
+            <p class="lic__note">Приказ 866н. При оказании первичной медико-санитарной помощи
+              организуются и выполняются следующие работы (услуги): при оказании первичной
+              специализированной медико-санитарной помощи в амбулаторных условиях по:</p>
+            <ul class="lic__works">
+              <li>стоматологии ортопедической</li>
+            </ul>
+          </dd>
         </div>
       </dl>
       <p class="lic__srok">
-        Срок действия лицензии — <strong>бессрочно</strong>. Актуальность сведений проверяется в едином реестре лицензий по QR-коду выше.
+        Срок действия лицензии — <strong>бессрочно</strong>. Сведения приведены по выписке из реестра
+        лицензий от <time class="mono" datetime="2026-07-30">30.07.2026</time>; актуальность проверяется
+        в реестре Росздравнадзора по QR-коду выше.
       </p>
     </div>
 
     <h3 class="sub-h">Уставные документы</h3>
     <ul class="docs">
+      <li class="docs__i">
+        <a href="assets/docs/vypiska-reestr-licenzij.pdf" target="_blank" rel="noopener">
+          <span class="docs__ico" aria-hidden="true"></span>
+          <span class="docs__txt"><strong>Выписка из реестра лицензий</strong><span>По состоянию на 30.07.2026 · 2 листа</span></span>
+          <span class="docs__meta mono">PDF · 373 КБ</span>
+        </a>
+      </li>
       <li class="docs__i">
         <a href="#" data-fill>
           <span class="docs__ico" aria-hidden="true"></span>
@@ -169,14 +216,14 @@
       <li class="docs__i">
         <a href="#" data-fill>
           <span class="docs__ico" aria-hidden="true"></span>
-          <span class="docs__txt"><strong>Свидетельство ОГРН</strong><span class="mono">0000000000000</span></span>
+          <span class="docs__txt"><strong>Свидетельство ОГРН</strong><span class="mono">1127412000374</span></span>
           <span class="docs__meta mono">PDF · 0,0 МБ</span>
         </a>
       </li>
       <li class="docs__i">
         <a href="#" data-fill>
           <span class="docs__ico" aria-hidden="true"></span>
-          <span class="docs__txt"><strong>Свидетельство ИНН</strong><span class="mono">0000000000</span></span>
+          <span class="docs__txt"><strong>Свидетельство ИНН</strong><span class="mono">7412016429</span></span>
           <span class="docs__meta mono">PDF · 0,0 МБ</span>
         </a>
       </li>
@@ -184,13 +231,6 @@
         <a href="#" data-fill>
           <span class="docs__ico" aria-hidden="true"></span>
           <span class="docs__txt"><strong>Выписка из ЕГРЮЛ</strong><span>Актуальна на «дата»</span></span>
-          <span class="docs__meta mono">PDF · 0,0 МБ</span>
-        </a>
-      </li>
-      <li class="docs__i">
-        <a href="#" data-fill>
-          <span class="docs__ico" aria-hidden="true"></span>
-          <span class="docs__txt"><strong>Лицензия с приложением</strong><span>Все листы</span></span>
           <span class="docs__meta mono">PDF · 0,0 МБ</span>
         </a>
       </li>
@@ -220,8 +260,8 @@
           <p class="mapbox__ph">Схема проезда<span>Вставьте iframe Яндекс.Карт</span></p>
         </div>
         <address class="addr">
-          <p><strong data-fill>Город, улица, дом, помещение</strong></p>
-          <p data-fill>Ориентир: 3 минуты пешком от станции «Название». Парковка во дворе.</p>
+          <p><strong>456550, Челябинская область, г. Коркино, ул. Цвиллинга, д. 28</strong></p>
+          <p data-fill>Ориентир и парковка — дописать.</p>
           <p><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a> · <a href="mailto:info@example.ru" data-fill>info@example.ru</a></p>
         </address>
       </div>
@@ -247,7 +287,7 @@
           <div class="dr__ph" data-fill><span aria-hidden="true">ФИО</span></div>
           <div class="dr__id">
             <h3 class="dr__name" data-fill>Фамилия Имя Отчество</h3>
-            <p class="dr__pos" data-fill>Должность — например, врач-стоматолог-терапевт</p>
+            <p class="dr__pos" data-fill>Должность — например, врач-стоматолог-ортопед</p>
             <p class="dr__exp"><span class="lbl">Стаж</span> <span class="mono" data-fill>00 лет</span></p>
           </div>
         </div>
@@ -255,7 +295,7 @@
         <dl class="dr__facts">
           <div><dt>Образование</dt><dd data-fill>Полное наименование вуза, <span class="mono">0000</span> г.</dd></div>
           <div><dt>Специальность по диплому</dt><dd data-fill>Стоматология</dd></div>
-          <div><dt>Ординатура / интернатура</dt><dd data-fill>Стоматология терапевтическая, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Ординатура / интернатура</dt><dd data-fill>Стоматология ортопедическая, <span class="mono">0000</span> г.</dd></div>
           <div><dt>Повышение квалификации</dt><dd data-fill>Тема, организация, <span class="mono">0000</span> г.</dd></div>
         </dl>
 
@@ -281,14 +321,14 @@
           <div class="dr__ph" data-fill><span aria-hidden="true">ФИО</span></div>
           <div class="dr__id">
             <h3 class="dr__name" data-fill>Фамилия Имя Отчество</h3>
-            <p class="dr__pos" data-fill>Должность — например, врач-стоматолог-хирург</p>
+            <p class="dr__pos" data-fill>Должность — например, зубной врач</p>
             <p class="dr__exp"><span class="lbl">Стаж</span> <span class="mono" data-fill>00 лет</span></p>
           </div>
         </div>
         <dl class="dr__facts">
           <div><dt>Образование</dt><dd data-fill>Полное наименование вуза, <span class="mono">0000</span> г.</dd></div>
           <div><dt>Специальность по диплому</dt><dd data-fill>Стоматология</dd></div>
-          <div><dt>Ординатура / интернатура</dt><dd data-fill>Стоматология хирургическая, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Ординатура / интернатура</dt><dd data-fill>Стоматология, <span class="mono">0000</span> г.</dd></div>
           <div><dt>Повышение квалификации</dt><dd data-fill>Тема, организация, <span class="mono">0000</span> г.</dd></div>
         </dl>
         <p class="accr" data-until="2026-10-15">
@@ -309,14 +349,14 @@
           <div class="dr__ph" data-fill><span aria-hidden="true">ФИО</span></div>
           <div class="dr__id">
             <h3 class="dr__name" data-fill>Фамилия Имя Отчество</h3>
-            <p class="dr__pos" data-fill>Должность — например, врач-ортодонт</p>
+            <p class="dr__pos" data-fill>Должность — например, медицинская сестра</p>
             <p class="dr__exp"><span class="lbl">Стаж</span> <span class="mono" data-fill>00 лет</span></p>
           </div>
         </div>
         <dl class="dr__facts">
           <div><dt>Образование</dt><dd data-fill>Полное наименование вуза, <span class="mono">0000</span> г.</dd></div>
-          <div><dt>Специальность по диплому</dt><dd data-fill>Стоматология</dd></div>
-          <div><dt>Ординатура / интернатура</dt><dd data-fill>Ортодонтия, <span class="mono">0000</span> г.</dd></div>
+          <div><dt>Специальность по диплому</dt><dd data-fill>Сестринское дело</dd></div>
+          <div><dt>Ординатура / интернатура</dt><dd data-fill>—</dd></div>
           <div><dt>Повышение квалификации</dt><dd data-fill>Тема, организация, <span class="mono">0000</span> г.</dd></div>
         </dl>
         <p class="accr" data-until="2031-02-01">
@@ -424,7 +464,7 @@
     <div class="orgs">
       <article class="doc org">
         <p class="org__kind">Надзор в сфере здравоохранения</p>
-        <h3 class="org__h" data-fill>Территориальный орган Росздравнадзора по «субъект РФ»</h3>
+        <h3 class="org__h">Территориальный орган Росздравнадзора по Челябинской области</h3>
         <dl class="org__c">
           <div><dt>Адрес</dt><dd data-fill>индекс, город, улица, дом</dd></div>
           <div><dt>Телефон</dt><dd><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></dd></div>
@@ -435,7 +475,7 @@
 
       <article class="doc org">
         <p class="org__kind">Санитарно-эпидемиологический надзор</p>
-        <h3 class="org__h" data-fill>Управление Роспотребнадзора по «субъект РФ»</h3>
+        <h3 class="org__h">Управление Роспотребнадзора по Челябинской области</h3>
         <dl class="org__c">
           <div><dt>Адрес</dt><dd data-fill>индекс, город, улица, дом</dd></div>
           <div><dt>Телефон</dt><dd><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></dd></div>
@@ -445,8 +485,8 @@
       </article>
 
       <article class="doc org">
-        <p class="org__kind">Орган управления здравоохранением</p>
-        <h3 class="org__h" data-fill>Министерство (департамент) здравоохранения «субъект РФ»</h3>
+        <p class="org__kind">Орган управления здравоохранением · лицензирующий орган</p>
+        <h3 class="org__h">Министерство здравоохранения Челябинской области</h3>
         <dl class="org__c">
           <div><dt>Адрес</dt><dd data-fill>индекс, город, улица, дом</dd></div>
           <div><dt>Телефон</dt><dd><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></dd></div>
@@ -581,13 +621,14 @@
 <footer class="foot">
   <div class="wrap foot__in">
     <div class="foot__col foot__col--brand">
-      <p class="foot__name" data-fill>Полное наименование медицинской организации</p>
+      <p class="foot__name">Общество с ограниченной ответственностью «Стоматологическая клиника Матвеева»</p>
       <p class="foot__req">
-        <span data-fill>ОГРН <span class="mono">0000000000000</span></span> ·
-        <span data-fill>ИНН <span class="mono">0000000000</span></span><br>
-        <span data-fill>Юридический адрес: индекс, город, улица, дом</span>
+        ОГРН <span class="mono">1127412000374</span> ·
+        ИНН <span class="mono">7412016429</span><br>
+        Адрес места нахождения: 456543, Челябинская область, р. п. Роза, ул. Уральская, д. 10, кв. 1<br>
+        Адрес оказания услуг: 456550, Челябинская область, г. Коркино, ул. Цвиллинга, д. 28
       </p>
-      <p class="foot__req" data-fill>Лицензия <span class="mono">Л041-00000-00/00000000</span> от <span class="mono">01.01.2025</span>, выдана «полное наименование лицензирующего органа»</p>
+      <p class="foot__req">Лицензия <span class="mono">Л041-01024-74/00379054</span> от <span class="mono">22.08.2014</span>, выдана Министерством здравоохранения Челябинской области</p>
     </div>
 
     <nav class="foot__col" aria-label="Разделы">
@@ -606,7 +647,7 @@
       <ul>
         <li><a class="mono" href="tel:+70000000000" data-fill>+7 (000) 000-00-00</a></li>
         <li><a href="mailto:info@example.ru" data-fill>info@example.ru</a></li>
-        <li data-fill>Город, улица, дом</li>
+        <li>г. Коркино, ул. Цвиллинга, д. 28</li>
         <li class="mono" data-fill>Пн–Пт 08:00–20:00</li>
       </ul>
     </div>
@@ -615,7 +656,7 @@
   <div class="wrap foot__legal">
     <!-- Если понадобится вернуть предупреждение о противопоказаниях — стиль .warn на месте:
          <p class="warn">Имеются противопоказания. Необходима консультация специалиста.</p> -->
-    <p class="foot__copy">© <span id="year">2026</span> <span data-fill>Наименование организации</span></p>
+    <p class="foot__copy">© <span id="year">2026</span> ООО «Стоматологическая клиника Матвеева»</p>
   </div>
 </footer>
 
