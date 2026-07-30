@@ -10,12 +10,12 @@
      Отсюда берётся строка «Сегодня» в верхней панели.
      ---------------------------------------------------------------------- */
   var SCHEDULE = [
-    '08:00–20:00', // пн
-    '08:00–20:00', // вт
-    '08:00–20:00', // ср
-    '08:00–20:00', // чт
-    '08:00–20:00', // пт
-    '09:00–18:00', // сб
+    '09:00–17:00', // пн
+    '09:00–17:00', // вт
+    '09:00–17:00', // ср
+    '09:00–17:00', // чт
+    '09:00–17:00', // пт
+    null,          // сб
     null           // вс
   ];
 
@@ -131,14 +131,21 @@
     today.setHours(0, 0, 0, 0);
 
     $$('.accr').forEach(function (box) {
-      var raw = box.getAttribute('data-until');
-      if (!raw) return;
+      var raw = (box.getAttribute('data-until') || '').trim();
+      var dateEl = $('.accr__date', box);
+      var chip = $('.accr__chip', box);
+
+      /* дата ещё не предоставлена — показываем это явно, а не пустым прочерком */
+      if (!raw) {
+        box.classList.add('accr--none');
+        if (dateEl) dateEl.textContent = 'не указана';
+        if (chip) chip.textContent = 'Ожидается';
+        return;
+      }
 
       var until = new Date(raw + 'T00:00:00');
       if (isNaN(until.getTime())) return;
 
-      var dateEl = $('.accr__date', box);
-      var chip = $('.accr__chip', box);
       var days = Math.round((until - today) / 86400000);
 
       if (dateEl) dateEl.textContent = ruDate(until);

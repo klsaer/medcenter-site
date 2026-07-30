@@ -509,6 +509,8 @@ body.show-fill [data-fill] {
 .dr__facts > div { display: flex; flex-direction: column; gap: 2px; }
 .dr__facts dt { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 700; }
 .dr__facts dd { font-size: .89rem; color: var(--ink); }
+/* реквизиты диплома — второстепенны рядом с самой специальностью */
+.dr__doc { font-size: .8rem; color: var(--ink-3); }
 
 /* аккредитация: статус кодируется формой и цветом, а не только числом */
 .accr {
@@ -521,8 +523,13 @@ body.show-fill [data-fill] {
   border-left: 3px solid var(--a-fg);
   margin-top: auto;
 }
+/* Модификаторы обязаны идти ПОСЛЕ .accr: специфичность та же,
+   решает порядок в файле. */
 .accr--warn { --a-fg: var(--warn); --a-bg: var(--warn-soft); }
 .accr--bad  { --a-fg: var(--bad);  --a-bg: var(--bad-soft); }
+/* дата аккредитации ещё не предоставлена — нейтрально, не зелёным */
+.accr--none { --a-fg: var(--ink-3); --a-bg: var(--surface-2); }
+.accr--none .accr__date { color: var(--ink-3); font-weight: 600; }
 .accr__lbl { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--a-fg); font-weight: 700; grid-column: 1; }
 .accr__date { grid-column: 1; font-size: 1.02rem; font-weight: 700; color: var(--ink); }
 .accr__chip {
