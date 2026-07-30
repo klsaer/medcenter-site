@@ -237,7 +237,6 @@ body.show-fill [data-fill] {
 .btn--primary { --btn-bg: var(--primary); --btn-fg: var(--primary-on); --btn-bd: var(--primary); }
 .btn--primary:hover { --btn-bg: var(--primary-2); --btn-bd: var(--primary-2); }
 .btn--ghost:hover { --btn-bd: var(--primary); --btn-fg: var(--primary); }
-.btn--full { width: 100%; }
 
 /* ---------- 7. Каркас: рельс + контент ---------- */
 .layout { display: block; }
@@ -676,29 +675,11 @@ body.show-fill [data-fill] {
 .cta__tel a { font-size: clamp(1.3rem, 1.1rem + 1vw, 1.7rem); font-weight: 700; text-decoration: none; color: var(--primary); }
 .cta__tel a:hover { text-decoration: underline; }
 
-.form { display: flex; flex-direction: column; gap: 14px; }
-.fld { display: flex; flex-direction: column; gap: 6px; }
-.fld__l { font-size: .8rem; font-weight: 650; color: var(--ink-2); }
-.fld__l em { font-style: normal; font-weight: 400; color: var(--ink-3); }
-.fld input, .fld textarea {
-  font: 400 .95rem var(--f-sans);
-  padding: 11px 14px; border-radius: var(--r-sm);
-  background: var(--surface-2); color: var(--ink);
-  border: 1px solid var(--line-2);
-  transition: border-color .15s, background .15s;
-  resize: vertical;
-}
-.fld input::placeholder, .fld textarea::placeholder { color: var(--ink-3); }
-.fld input:focus, .fld textarea:focus { border-color: var(--primary); background: var(--surface); }
-.fld input[aria-invalid="true"], .fld textarea[aria-invalid="true"] { border-color: var(--bad); }
-
-.chk { display: flex; gap: 10px; align-items: flex-start; font-size: .82rem; color: var(--ink-2); line-height: 1.45; cursor: pointer; }
-.chk input { margin: 2px 0 0; width: 16px; height: 16px; flex: none; accent-color: var(--primary); }
-
-.form__status { font-size: .87rem; font-weight: 600; min-height: 1.2em; }
-.form__status.is-ok { color: var(--ok); }
-.form__status.is-err { color: var(--bad); }
-.form__hint { font-size: .76rem; color: var(--ink-3); }
+/* контакты для записи вместо формы: сайт информационный */
+.cta__facts { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; }
+.cta__facts > div { background: var(--surface); padding: 13px 16px; }
+.cta__facts dt { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 700; margin-bottom: 4px; }
+.cta__facts dd { font-size: .92rem; }
 
 /* ---------- 16. Подвал ---------- */
 .foot { background: var(--bg-2); border-top: 1px solid var(--line); margin-top: 20px; }
@@ -779,7 +760,8 @@ body.show-fill [data-fill] {
 
 /* ---------- 18. Печать ---------- */
 @media print {
-  .utilbar, .masthead, .rail, .template-banner, .sec--cta, .theme-btn, .pricetools { display: none !important; }
+  /* .sec--cta печатаем: там контакты для записи, а не форма */
+  .utilbar, .masthead, .rail, .template-banner, .theme-btn, .pricetools { display: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .doc, .dr, .qa, .docs__i a { box-shadow: none; border: 1px solid #999; break-inside: avoid; }
   .sec { padding-block: 18pt; break-inside: avoid-page; }

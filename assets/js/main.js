@@ -222,37 +222,6 @@
     render('');
   })();
 
-  /* ---------- Форма записи (демо: без отправки) ---------- */
-  (function form() {
-    var f = $('#appForm');
-    if (!f) return;
-    var status = $('#formStatus');
-
-    f.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var bad = null;
-      $$('input, textarea', f).forEach(function (el) {
-        if (!el.required) return;
-        var ok = el.type === 'checkbox' ? el.checked : el.value.trim().length > 1;
-        el.setAttribute('aria-invalid', ok ? 'false' : 'true');
-        if (!ok && !bad) bad = el;
-      });
-
-      if (bad) {
-        status.className = 'form__status is-err';
-        status.textContent = 'Заполните обязательные поля и подтвердите согласие.';
-        bad.focus();
-        return;
-      }
-
-      status.className = 'form__status is-ok';
-      status.textContent = 'Заявка принята. Администратор перезвонит в рабочее время.';
-      f.reset();
-      $$('[aria-invalid]', f).forEach(function (el) { el.removeAttribute('aria-invalid'); });
-    });
-  })();
-
   /* ---------- Режим «показать заглушки» ---------- */
   (function fillMode() {
     var btn = $('#fillToggle');
