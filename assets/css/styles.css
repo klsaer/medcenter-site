@@ -278,7 +278,6 @@ body.show-fill [data-fill] {
   .rail__list a.is-active { color: var(--primary); font-weight: 650; border-left-color: var(--primary); }
   .rail__n { font: 600 .72rem/1 var(--f-mono); color: var(--ink-3); flex: none; padding-top: 2px; }
   .rail__list a.is-active .rail__n { color: var(--primary); }
-  .rail__note { margin-top: 18px; font-size: .74rem; line-height: 1.5; color: var(--ink-3); border-top: 1px dashed var(--line-2); padding-top: 12px; }
 }
 
 .main { min-width: 0; padding-bottom: 40px; }
@@ -756,7 +755,6 @@ body.show-fill [data-fill] {
   }
   .rail__list a:hover, .rail__list a.is-active { background: var(--primary-soft); color: var(--primary); }
   .rail__n { font: 600 .74rem/1 var(--f-mono); color: var(--ink-3); }
-  .rail__note { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--line-2); font-size: .78rem; color: var(--ink-3); line-height: 1.5; }
 
   .scrim { position: fixed; inset: 0; z-index: 45; background: rgba(6, 20, 18, .45); backdrop-filter: blur(2px); border: 0; padding: 0; cursor: pointer; }
 
