@@ -661,6 +661,13 @@ body.show-fill [data-fill] {
 .qa[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); border-color: var(--primary); }
 .qa summary:hover { color: var(--primary); }
 .qa__b { padding: 0 18px 18px; color: var(--ink-2); font-size: .92rem; border-top: 1px dashed var(--line); padding-top: 14px; }
+.qa__b > * + * { margin-top: 12px; }
+/* подзаголовок перед перечнем прав/обязанностей */
+.qa__cap { font-weight: 600; color: var(--ink); }
+.qa__cap + .qa__list { margin-top: 8px; }
+.qa__list { display: flex; flex-direction: column; gap: 5px; padding-left: 18px; }
+.qa__list li { list-style: disc; }
+.qa__list li::marker { color: var(--ink-3); }
 
 .std__lead { margin-bottom: 16px; font-size: .95rem; }
 
