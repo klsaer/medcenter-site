@@ -512,6 +512,12 @@ body.show-fill [data-fill] {
 /* реквизиты диплома — второстепенны рядом с самой специальностью */
 .dr__doc { font-size: .8rem; color: var(--ink-3); }
 
+/* несколько аккредитаций у одного врача — по одной на специальность */
+.accrs { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.accrs__cap { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 700; }
+.accrs__src { font-size: .78rem; color: var(--ink-3); line-height: 1.45; }
+.accrs .accr { margin-top: 0; }
+
 /* аккредитация: статус кодируется формой и цветом, а не только числом */
 .accr {
   --a-fg: var(--ok); --a-bg: var(--ok-soft);

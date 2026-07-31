@@ -26,8 +26,8 @@
      Перед сдачей клиенту удалить блок .template-banner ниже.
      ============================================================ -->
 <div class="template-banner" role="note">
-  <strong>Сайт в работе.</strong> Реквизиты, лицензия, прейскурант, телефон и контакты
-  надзорных органов — настоящие. Часть документов и сведений о враче — заглушки.
+  <strong>Сайт в работе.</strong> Реквизиты, лицензия, прейскурант, аккредитация врача,
+  телефон и контакты надзорных органов — настоящие. Логотип, фото и часть документов — заглушки.
   <button type="button" class="banner-btn" id="fillToggle" aria-pressed="false">Показать заглушки</button>
 </div>
 
@@ -339,13 +339,36 @@
           </div>
         </dl>
 
-        <!-- Аккредитация ещё не предоставлена. Когда придёт — вписать дату окончания
-             в data-until="ГГГГ-ММ-ДД", остальное посчитается автоматически. -->
-        <p class="accr" data-until="" data-fill>
-          <span class="accr__lbl">Аккредитация</span>
-          <span class="accr__date mono">—</span>
-          <span class="accr__chip">—</span>
-        </p>
+        <!-- Аккредитации из выписки ЕГИСЗ от 31.07.2026.
+             Дату ставить ТОЛЬКО в data-until="ГГГГ-ММ-ДД" — подпись и цветной
+             статус считаются автоматически. -->
+        <div class="accrs">
+          <p class="accrs__cap">Аккредитация специалиста</p>
+
+          <p class="accr" data-until="2030-05-27">
+            <span class="accr__lbl">Стоматология ортопедическая · до</span>
+            <span class="accr__date mono">27.05.2030</span>
+            <span class="accr__chip">—</span>
+          </p>
+
+          <p class="accr" data-until="2030-04-22">
+            <span class="accr__lbl">Стоматология хирургическая · до</span>
+            <span class="accr__date mono">22.04.2030</span>
+            <span class="accr__chip">—</span>
+          </p>
+
+          <p class="accr" data-until="2029-05-21">
+            <span class="accr__lbl">Стоматология общей практики · до</span>
+            <span class="accr__date mono">21.05.2029</span>
+            <span class="accr__chip">—</span>
+          </p>
+
+          <p class="accrs__src">
+            Периодическая аккредитация, ФГБОУ ДПО «Российская медицинская академия
+            непрерывного профессионального образования» Минздрава России.
+            Сведения — из ЕГИСЗ, выписка от <time class="mono" datetime="2026-07-31">31.07.2026</time>.
+          </p>
+        </div>
       </article>
 
     </div>
