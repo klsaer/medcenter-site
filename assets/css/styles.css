@@ -137,12 +137,15 @@ a:hover { text-decoration-color: currentColor; }
 }
 
 .skip-link {
-  position: absolute; left: 8px; top: -60px; z-index: 100;
+  position: absolute; left: 8px; top: 8px; z-index: 100;
   background: var(--primary); color: var(--primary-on);
   padding: 10px 16px; border-radius: var(--r-sm); font-weight: 600;
-  transition: top .15s;
+  /* Прячем сдвигом на собственную высоту, а не фиксированными -60px:
+     в версии для слабовидящих шрифт крупнее и ссылка выглядывала сверху. */
+  transform: translateY(calc(-100% - 12px));
+  transition: transform .15s;
 }
-.skip-link:focus { top: 8px; }
+.skip-link:focus { transform: none; }
 
 .wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
 
@@ -786,10 +789,174 @@ body.show-fill [data-fill] {
   .dr__ph { width: 62px; height: 62px; }
 }
 
-/* ---------- 18. Печать ---------- */
+/* ---------- 18. Карта сайта ---------- */
+.smap { display: grid; gap: 26px 32px; grid-template-columns: repeat(auto-fit, minmax(228px, 1fr)); }
+.smap__h { font-weight: 650; font-size: .95rem; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.smap__h a { color: var(--ink); text-decoration: none; }
+.smap__h a:hover { color: var(--primary); }
+.smap__col ul { display: flex; flex-direction: column; gap: 7px; }
+.smap__col li { font-size: .89rem; line-height: 1.45; }
+
+/* ---------- 19. Поиск по сайту ---------- */
+.srch { position: fixed; inset: 0; z-index: 60; background: color-mix(in srgb, var(--ink) 45%, transparent); padding: clamp(12px, 6vh, 76px) 16px 16px; overflow-y: auto; }
+/* body.nav-open существует только в мобильной медиазапросе, поэтому для
+   оверлея поиска нужен собственный замок прокрутки */
+body.srch-open { overflow: hidden; }
+.srch__box { width: 100%; max-width: 680px; margin-inline: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow-md); overflow: hidden; }
+.srch__top { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.srch__ico { flex: none; color: var(--ink-3); }
+.srch__inp { flex: 1 1 auto; min-width: 0; border: 0; background: transparent; color: var(--ink); font: 400 1rem/1.4 var(--f-sans); padding: 4px 0; }
+.srch__inp:focus { outline: none; }
+.srch__inp::-webkit-search-cancel-button { display: none; }
+.srch__x { flex: none; background: transparent; border: 1px solid var(--line-2); border-radius: var(--r-sm); color: var(--ink-3); font: 600 .72rem/1 var(--f-mono); padding: 6px 8px; cursor: pointer; }
+.srch__x:hover { color: var(--primary); border-color: var(--primary); }
+.srch__count { padding: 10px 14px; font-size: .82rem; color: var(--ink-3); border-bottom: 1px solid var(--line); }
+.srch__list { max-height: min(56vh, 460px); overflow-y: auto; }
+.srch__list:empty { display: none; }
+.srch__list li + li { border-top: 1px solid var(--line); }
+.srch__list a { display: block; padding: 12px 14px; text-decoration: none; color: var(--ink-2); }
+.srch__list a:hover, .srch__list a:focus-visible { background: var(--surface-2); }
+.srch__sec { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--primary); font-weight: 700; margin-bottom: 3px; }
+.srch__txt { display: block; font-size: .9rem; line-height: 1.45; }
+.srch__txt mark { background: var(--warn-soft); color: inherit; font-weight: 650; padding: 0 1px; }
+/* подсветка найденного места после перехода */
+.srch-hit { animation: srchHit 2.2s ease-out 1; }
+@keyframes srchHit {
+  0%, 60% { background: var(--warn-soft); box-shadow: 0 0 0 6px var(--warn-soft); }
+  100%    { background: transparent; box-shadow: 0 0 0 6px transparent; }
+}
+
+/* ---------- 20. Версия для слабовидящих ----------
+   Приказ Минздрава № 118н, приложение 2, п. 2.
+   Смысл режима — предсказуемость: цвета и украшения перекрываются
+   целиком, поэтому здесь переопределяются сами токены, а не отдельные
+   правила. Тёмная тема в этом режиме роли не играет — схему выбирает
+   посетитель. Все размеры шрифтов в файле заданы в rem, поэтому масштаб
+   меняется одной строкой на :root. */
+:root[data-vi] {
+  --bg: #fff; --bg-2: #fff; --surface: #fff; --surface-2: #fff;
+  --ink: #000; --ink-2: #000; --ink-3: #000;
+  --line: #000; --line-2: #000;
+  --primary: #000; --primary-2: #000; --primary-on: #fff; --primary-soft: #fff; --primary-dim: #000;
+  --navy: #000; --navy-soft: #fff;
+  --ok: #000; --ok-soft: #fff; --warn: #000; --warn-soft: #fff; --bad: #000; --bad-soft: #fff;
+  --shadow-sm: none; --shadow-md: none;
+  --r-sm: 0; --r: 0; --r-lg: 0;
+  color-scheme: light;
+  font-size: 20px;
+}
+:root[data-vi][data-vi-size="2"] { font-size: 25px; }
+:root[data-vi][data-vi-size="3"] { font-size: 31px; }
+
+:root[data-vi][data-vi-scheme="bw"] {
+  --bg: #000; --bg-2: #000; --surface: #000; --surface-2: #000;
+  --ink: #fff; --ink-2: #fff; --ink-3: #fff;
+  --line: #fff; --line-2: #fff;
+  --primary: #fff; --primary-2: #fff; --primary-on: #000; --primary-soft: #000; --primary-dim: #fff;
+  --navy: #fff; --navy-soft: #000;
+  --ok: #fff; --ok-soft: #000; --warn: #fff; --warn-soft: #000; --bad: #fff; --bad-soft: #000;
+  color-scheme: dark;
+}
+:root[data-vi][data-vi-scheme="bb"] {
+  --bg: #9DD1FF; --bg-2: #9DD1FF; --surface: #9DD1FF; --surface-2: #9DD1FF;
+  --ink: #063462; --ink-2: #063462; --ink-3: #063462;
+  --line: #063462; --line-2: #063462;
+  --primary: #063462; --primary-2: #063462; --primary-on: #9DD1FF; --primary-soft: #9DD1FF; --primary-dim: #063462;
+  --navy: #063462; --navy-soft: #9DD1FF;
+  --ok: #063462; --ok-soft: #9DD1FF; --warn: #063462; --warn-soft: #9DD1FF; --bad: #063462; --bad-soft: #9DD1FF;
+  color-scheme: light;
+}
+
+/* тело: font-size задан в px, поэтому подчиняем его тому же rem */
+:root[data-vi] body { font-size: 1rem; }
+
+/* Прозрачность и размытие в шапке делают текст нечитаемым поверх контента */
+:root[data-vi] .masthead { background: var(--surface); backdrop-filter: none; position: static; }
+:root[data-vi] .utilbar { background: var(--surface); color: var(--ink); border-bottom: 1px solid var(--line); }
+:root[data-vi] .utilbar .mono,
+:root[data-vi] .utilbar__tel a { color: var(--ink); }
+
+/* Крупный шрифт не помещается в две колонки — раскладка в одну */
+:root[data-vi] .layout { display: block; }
+:root[data-vi] .rail { display: none; }
+:root[data-vi] .burger { display: none; }
+:root[data-vi] .theme-btn { display: none; }
+:root[data-vi] #viBtn { display: grid; }
+:root[data-vi] .template-banner { display: none; }
+/* карта — картинка, в этом режиме от неё нет пользы, а тянет 300 КБ */
+:root[data-vi] .mapbox { display: none; }
+/* декоративный градиент карточки даёт серый налёт под текстом — гасим */
+:root[data-vi] .orgcard::before { display: none; }
+/* overflow: hidden обрезал бы крупный текст вместо переноса */
+:root[data-vi] .orgcard { overflow: visible; }
+
+/* Заголовки заданы через clamp() с vw: при 25–31px базового шрифта
+   «Стоматологическая» перестаёт помещаться в строку на телефоне и текст
+   уезжает за край. Размер берём от rem — он и так растёт вместе
+   с выбранным масштабом, — но ограничиваем долей ширины экрана:
+   иначе на телефоне при самом крупном шрифте заголовок рвался бы
+   посреди слова (см. overflow-wrap ниже), а так ломается по словам. */
+:root[data-vi] .orgcard__h { font-size: min(1.55rem, 7.2vw); }
+:root[data-vi] .sec__h     { font-size: min(1.35rem, 6.4vw); }
+:root[data-vi] .cta__h     { font-size: min(1.3rem, 6.2vw); }
+:root[data-vi] .cta__tel a { font-size: min(1.2rem, 6vw); }
+/* Длинные слова и номера. Именно anywhere, а не break-word: break-word
+   переносит, но не уменьшает минимальную ширину блока, и ячейка сетки
+   всё равно растягивается по самому длинному слову — карточка организации
+   вылезала за экран на 100 px.
+   hyphens: auto заставляет браузер сначала попробовать перенос по правилам
+   русского языка, с дефисом (страница объявлена lang="ru"); anywhere
+   остаётся страховкой для номеров и адресов, которые не переносятся. */
+:root[data-vi] body { overflow-wrap: anywhere; hyphens: auto; }
+:root[data-vi] .orgcard > *,
+:root[data-vi] .orgcard__body,
+:root[data-vi] .reqs__i { min-width: 0; }
+/* у .btn стоит white-space: nowrap — на крупном шрифте «Лицензия
+   и документы» не влезала в 390 px и толкала страницу вбок */
+:root[data-vi] .btn { white-space: normal; text-align: center; }
+:root[data-vi] .dr__ph { display: none; }
+
+/* Все ссылки подчёркнуты: цветом их в одноцветной схеме не отличить */
+:root[data-vi] a { text-decoration: underline; text-decoration-color: currentColor; }
+:root[data-vi] .doc,
+:root[data-vi] .dr,
+:root[data-vi] .qa,
+:root[data-vi] .docs__i a,
+:root[data-vi] .org,
+:root[data-vi] .laws li { border: 1px solid var(--line) !important; box-shadow: none !important; }
+
+:root[data-vi][data-vi-space="1"] body { letter-spacing: .06em; word-spacing: .14em; line-height: 1.9; }
+:root[data-vi][data-vi-img="off"] img,
+:root[data-vi][data-vi-img="off"] .qr,
+:root[data-vi][data-vi-img="off"] .brand__mark { display: none; }
+
+/* Панель настроек */
+.vip { background: var(--bg-2); border-bottom: 1px solid var(--line); }
+.vip__in { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding-block: 12px; }
+.vip__grp { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.vip__cap { font-size: .78rem; color: var(--ink-3); font-weight: 650; margin-right: 2px; }
+.vip__b {
+  background: var(--surface); color: var(--ink-2);
+  border: 1px solid var(--line-2); border-radius: var(--r-sm);
+  padding: 7px 11px; font: 600 .82rem/1 var(--f-sans); cursor: pointer;
+}
+.vip__b:hover { border-color: var(--primary); color: var(--primary); }
+.vip__b[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.vip__b--a1 { font-size: .82rem; }
+.vip__b--a2 { font-size: 1.02rem; }
+.vip__b--a3 { font-size: 1.24rem; }
+.vip__sw::before { content: ""; width: 13px; height: 13px; display: inline-block; vertical-align: -2px; margin-right: 7px; border: 1px solid currentColor; }
+.vip__sw--wb::before { background: #fff; }
+.vip__sw--bw::before { background: #000; }
+.vip__sw--bb::before { background: #9DD1FF; }
+.vip__off { margin-left: auto; background: transparent; border: 1px solid var(--line-2); border-radius: var(--r-sm); color: var(--ink-2); padding: 7px 13px; font: 600 .82rem/1 var(--f-sans); cursor: pointer; }
+.vip__off:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ---------- 21. Печать ---------- */
 @media print {
   /* .sec--cta печатаем: там контакты для записи, а не форма */
-  .utilbar, .masthead, .rail, .template-banner, .theme-btn, .pricetools { display: none !important; }
+  .utilbar, .masthead, .rail, .template-banner, .theme-btn, .pricetools,
+  .vip, .srch, .sec--map { display: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .doc, .dr, .qa, .docs__i a { box-shadow: none; border: 1px solid #999; break-inside: avoid; }
   .sec { padding-block: 18pt; break-inside: avoid-page; }

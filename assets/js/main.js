@@ -51,6 +51,187 @@
     });
   })();
 
+  /* ---------- Версия для слабовидящих ----------
+     Приказ Минздрава № 118н, приложение 2, п. 2. Состояние живёт
+     в атрибутах data-vi-* на <html>; скрипт в <head> восстанавливает их
+     до отрисовки, здесь только переключение и запоминание. */
+  (function visuallyImpaired() {
+    var btn = $('#viBtn'), panel = $('#viPanel'), off = $('#viOff');
+    if (!btn || !panel) return;
+
+    var root = document.documentElement;
+    var DEFAULTS = { size: '1', scheme: 'wb', space: '0', img: 'on' };
+
+    function save(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
+
+    function sync() {
+      var on = root.hasAttribute('data-vi');
+      panel.hidden = !on;
+      btn.setAttribute('aria-expanded', String(on));
+      $$('[data-vi-key]', panel).forEach(function (b) {
+        var k = b.getAttribute('data-vi-key');
+        var cur = root.getAttribute('data-vi-' + k) || DEFAULTS[k];
+        b.setAttribute('aria-pressed', String(cur === b.getAttribute('data-vi-val')));
+      });
+    }
+
+    function enable() {
+      root.setAttribute('data-vi', '');
+      Object.keys(DEFAULTS).forEach(function (k) {
+        if (!root.getAttribute('data-vi-' + k)) root.setAttribute('data-vi-' + k, DEFAULTS[k]);
+      });
+      save('mc-vi', 'on');
+      sync();
+    }
+
+    function disable() {
+      root.removeAttribute('data-vi');
+      save('mc-vi', 'off');
+      sync();
+    }
+
+    btn.addEventListener('click', function () {
+      root.hasAttribute('data-vi') ? disable() : enable();
+    });
+
+    if (off) off.addEventListener('click', function () { disable(); btn.focus(); });
+
+    panel.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-vi-key]');
+      if (!b) return;
+      var k = b.getAttribute('data-vi-key'), v = b.getAttribute('data-vi-val');
+      root.setAttribute('data-vi-' + k, v);
+      save('mc-vi-' + k, v);
+      sync();
+    });
+
+    sync();
+  })();
+
+  /* ---------- Поиск по сайту ----------
+     Приказ № 118н, приложение 2, п. 2. Страница одна, поэтому индекс
+     строится прямо из DOM — при первом открытии, а не при загрузке. */
+  (function siteSearch() {
+    var openBtn = $('#searchBtn'), box = $('#srch'), inp = $('#srchInput'),
+        list = $('#srchList'), count = $('#srchCount'), closeBtn = $('#srchClose');
+    if (!openBtn || !box || !inp || !list) return;
+
+    var MAX = 12;
+    var index = null;
+    var marked = null;
+
+    function esc(s) {
+      return s.replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+
+    function build() {
+      if (index) return index;
+      index = [];
+      /* Карта сайта — это перечень ссылок на те же разделы; в выдаче
+         она давала бы дубль к каждому реальному попаданию. */
+      $$('main .sec:not(#sitemap)').forEach(function (sec) {
+        var head = $('.sec__h', sec) || $('.orgcard__h', sec) || $('.cta__h', sec);
+        var name = head ? head.textContent.replace(/\s+/g, ' ').trim() : 'Раздел';
+
+        $$('h3, h4, p, li, dd, summary, td', sec).forEach(function (el) {
+          /* берём только листья: иначе абзац попадёт и сам, и внутри <li> */
+          if (el.querySelector('h3, h4, p, li, dd, summary, td')) return;
+          /* надстрочник «02 Врачи и аккредитация» дублирует название раздела */
+          if (el.classList.contains('eyebrow')) return;
+
+          /* innerText, а не textContent: соседние блочные строки внутри
+             карточки иначе слипаются в «специалистаМатвеев А. А.» */
+          var text = (el.innerText || el.textContent).replace(/\s+/g, ' ').trim();
+          if (text.length < 8) return;
+          index.push({ el: el, sec: name, text: text, low: text.toLowerCase() });
+        });
+      });
+      return index;
+    }
+
+    function snippet(item, needle) {
+      var i = item.low.indexOf(needle);
+      var from = Math.max(0, i - 45);
+      var to = Math.min(item.text.length, i + needle.length + 80);
+      var head = item.text.slice(from, i);
+      var hit = item.text.substr(i, needle.length);
+      var tail = item.text.slice(i + needle.length, to);
+      return (from > 0 ? '…' : '') + esc(head) + '<mark>' + esc(hit) + '</mark>' +
+             esc(tail) + (to < item.text.length ? '…' : '');
+    }
+
+    function render() {
+      var needle = inp.value.trim().toLowerCase();
+      list.innerHTML = '';
+
+      if (needle.length < 2) {
+        count.textContent = 'Введите запрос — поиск идёт по всему тексту страницы';
+        return;
+      }
+
+      var hits = build().filter(function (it) { return it.low.indexOf(needle) !== -1; });
+
+      count.textContent = hits.length
+        ? 'Найдено ' + hits.length + ' ' + plural(hits.length, ['совпадение', 'совпадения', 'совпадений']) +
+          (hits.length > MAX ? ', показаны первые ' + MAX : '')
+        : 'Ничего не найдено';
+
+      hits.slice(0, MAX).forEach(function (it) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#';
+        a.innerHTML = '<span class="srch__sec">' + esc(it.sec) + '</span>' +
+                      '<span class="srch__txt">' + snippet(it, needle) + '</span>';
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          hide();
+          go(it.el);
+        });
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    }
+
+    function go(el) {
+      if (marked) marked.classList.remove('srch-hit');
+      /* details не прокрутить к содержимому, пока он закрыт */
+      var det = el.closest('details');
+      if (det) det.open = true;
+      /* строка прейскуранта могла быть скрыта фильтром той же таблицы */
+      if (el.hidden) el.hidden = false;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('srch-hit');
+      marked = el;
+      setTimeout(function () { if (marked === el) el.classList.remove('srch-hit'); }, 2400);
+    }
+
+    function show() {
+      box.hidden = false;
+      document.body.classList.add('srch-open');
+      inp.focus();
+      inp.select();
+    }
+
+    function hide() {
+      box.hidden = true;
+      document.body.classList.remove('srch-open');
+    }
+
+    openBtn.addEventListener('click', show);
+    if (closeBtn) closeBtn.addEventListener('click', function () { hide(); openBtn.focus(); });
+    inp.addEventListener('input', render);
+
+    box.addEventListener('mousedown', function (e) {
+      if (e.target === box) { hide(); openBtn.focus(); }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !box.hidden) { hide(); openBtn.focus(); }
+    });
+  })();
+
   /* ---------- Мобильная навигация ---------- */
   (function nav() {
     var burger = $('#burger');

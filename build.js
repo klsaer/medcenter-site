@@ -101,4 +101,17 @@ console.log('    dist/artifact.html  ' + kb('artifact.html'));
   }
 })();
 
+/* --- 6. Напоминание про robots.txt ---
+   Черновик закрыт от индексации намеренно. Открыть его надо ровно один раз —
+   в день сдачи, и забыть это проще всего. */
+(function checkRobots() {
+  const p = path.join(ROOT, 'robots.txt');
+  if (!fs.existsSync(p)) { console.log('\n  ! robots.txt отсутствует'); return; }
+
+  const closed = /^\s*Disallow:\s*\/\s*$/m.test(read('robots.txt'));
+  console.log('\n  robots.txt: ' + (closed
+    ? 'сайт ЗАКРЫТ от поисковиков — открыть в день сдачи'
+    : 'сайт открыт для индексации'));
+})();
+
 console.log('');

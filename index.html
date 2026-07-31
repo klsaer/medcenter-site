@@ -5,14 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Стоматологическая клиника Матвеева — Коркино | лицензия, врачи, прейскурант</title>
 <meta name="description" content="ООО «Стоматологическая клиника Матвеева», г. Коркино, ул. Цвиллинга, 28. Лицензия Л041-01024-74/00379054, врачи и аккредитация, прейскурант, контакты контролирующих органов.">
+
+<!-- Превью ссылки в мессенджерах и соцсетях.
+     og:url и og:image добавить, когда будут домен и логотип:
+       <meta property="og:url" content="https://домен/">
+       <meta property="og:image" content="https://домен/assets/img/og.png">  1200×630 -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Стоматологическая клиника Матвеева">
+<meta property="og:title" content="Стоматологическая клиника Матвеева — Коркино">
+<meta property="og:description" content="Лицензия, врачи и аккредитация, прейскурант, контакты контролирующих органов. г. Коркино, ул. Цвиллинга, 28.">
+<meta name="twitter:card" content="summary">
+
 <link rel="stylesheet" href="assets/css/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230F5E56'/><path d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='%23fff'/></svg>">
 <script>
-  /* Применяем сохранённую тему до отрисовки, чтобы не мигало */
-  try {
-    var t = localStorage.getItem('mc-theme');
-    if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
-  } catch (e) {}
+  /* Применяем сохранённые настройки до отрисовки, чтобы не мигало.
+     Версия для слабовидящих особенно: человек, который её включил,
+     не должен увидеть обычную страницу даже на долю секунды. */
+  (function () {
+    var root = document.documentElement;
+    try {
+      var t = localStorage.getItem('mc-theme');
+      if (t === 'dark' || t === 'light') root.setAttribute('data-theme', t);
+
+      if (localStorage.getItem('mc-vi') === 'on') {
+        root.setAttribute('data-vi', '');
+        root.setAttribute('data-vi-size', localStorage.getItem('mc-vi-size') || '1');
+        root.setAttribute('data-vi-scheme', localStorage.getItem('mc-vi-scheme') || 'wb');
+        root.setAttribute('data-vi-space', localStorage.getItem('mc-vi-space') || '0');
+        root.setAttribute('data-vi-img', localStorage.getItem('mc-vi-img') || 'on');
+      }
+    } catch (e) {}
+  })();
 </script>
 </head>
 <body>
@@ -69,6 +94,14 @@
     </button>
 
     <div class="masthead__act">
+      <button class="theme-btn" id="searchBtn" aria-label="Поиск по сайту" title="Поиск по сайту">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.4 15.4 4.6 4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <!-- Версия для слабовидящих — требование приказа Минздрава № 118н,
+           приложение 2, п. 2. Кнопка держится в шапке намеренно: её ищут там. -->
+      <button class="theme-btn" id="viBtn" aria-expanded="false" aria-controls="viPanel" aria-label="Версия для слабовидящих" title="Версия для слабовидящих">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M1.8 12S5.3 5.8 12 5.8 22.2 12 22.2 12 18.7 18.2 12 18.2 1.8 12 1.8 12z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+      </button>
       <button class="theme-btn" id="themeBtn" aria-label="Переключить тему" title="Переключить тему">
         <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path class="ico-sun" d="M12 5V2m0 20v-3m7-7h3M2 12h3m12.07-5.07 2.12-2.12M4.81 19.19l2.12-2.12m0-10.14L4.81 4.81m14.38 14.38-2.12-2.12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/><circle class="ico-sun" cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" fill="none"/><path class="ico-moon" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/></svg>
       </button>
@@ -76,6 +109,57 @@
     </div>
   </div>
 </header>
+
+<!-- ── Панель версии для слабовидящих ──
+     Настройки хранятся в localStorage и применяются скриптом в <head>
+     до отрисовки. Значения — в атрибутах data-vi-* на <html>. -->
+<div class="vip" id="viPanel" hidden>
+  <div class="wrap vip__in">
+    <div class="vip__grp" role="group" aria-labelledby="vip-size">
+      <span class="vip__cap" id="vip-size">Размер</span>
+      <button type="button" class="vip__b vip__b--a1" data-vi-key="size" data-vi-val="1">A</button>
+      <button type="button" class="vip__b vip__b--a2" data-vi-key="size" data-vi-val="2">A</button>
+      <button type="button" class="vip__b vip__b--a3" data-vi-key="size" data-vi-val="3">A</button>
+    </div>
+
+    <div class="vip__grp" role="group" aria-labelledby="vip-scheme">
+      <span class="vip__cap" id="vip-scheme">Цвета</span>
+      <button type="button" class="vip__b vip__sw vip__sw--wb" data-vi-key="scheme" data-vi-val="wb">Чёрным по белому</button>
+      <button type="button" class="vip__b vip__sw vip__sw--bw" data-vi-key="scheme" data-vi-val="bw">Белым по чёрному</button>
+      <button type="button" class="vip__b vip__sw vip__sw--bb" data-vi-key="scheme" data-vi-val="bb">Синим по голубому</button>
+    </div>
+
+    <div class="vip__grp" role="group" aria-labelledby="vip-space">
+      <span class="vip__cap" id="vip-space">Интервал</span>
+      <button type="button" class="vip__b" data-vi-key="space" data-vi-val="0">Обычный</button>
+      <button type="button" class="vip__b" data-vi-key="space" data-vi-val="1">Увеличенный</button>
+    </div>
+
+    <div class="vip__grp" role="group" aria-labelledby="vip-img">
+      <span class="vip__cap" id="vip-img">Изображения</span>
+      <button type="button" class="vip__b" data-vi-key="img" data-vi-val="on">Показывать</button>
+      <button type="button" class="vip__b" data-vi-key="img" data-vi-val="off">Скрыть</button>
+    </div>
+
+    <button type="button" class="vip__off" id="viOff">Обычная версия сайта</button>
+  </div>
+</div>
+
+<!-- ── Поиск по сайту ──
+     Требование приказа № 118н, приложение 2, п. 2: «работоспособного
+     поиска по сайту». Индекс строится из DOM при первом открытии. -->
+<div class="srch" id="srch" hidden>
+  <div class="srch__box" role="dialog" aria-modal="true" aria-labelledby="srch-h">
+    <h2 class="vh" id="srch-h">Поиск по сайту</h2>
+    <div class="srch__top">
+      <svg class="srch__ico" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.4 15.4 4.6 4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input class="srch__inp" id="srchInput" type="search" placeholder="Например: аккредитация, удаление зуба, жалоба" autocomplete="off" aria-describedby="srchCount">
+      <button type="button" class="srch__x" id="srchClose" aria-label="Закрыть поиск">Esc</button>
+    </div>
+    <p class="srch__count" id="srchCount" role="status">Введите запрос — поиск идёт по всему тексту страницы</p>
+    <ul class="srch__list" id="srchList"></ul>
+  </div>
+</div>
 
 <div class="wrap layout" id="content">
 
@@ -704,6 +788,79 @@
     </div>
   </section>
 
+  <!-- ══════════ КАРТА САЙТА ══════════
+       Требование приказа № 118н, приложение 2, п. 2: «наличие карты
+       официального сайта для удобства навигации». Страница одна,
+       поэтому карта — это перечень разделов и подразделов с якорями. -->
+  <section class="sec sec--map" id="sitemap" aria-labelledby="sitemap-h">
+    <header class="sec__head">
+      <p class="eyebrow">Навигация</p>
+      <h2 class="sec__h" id="sitemap-h">Карта сайта</h2>
+      <p class="sec__lead">Полный перечень разделов и размещённых документов.</p>
+    </header>
+
+    <div class="smap">
+      <nav class="smap__col" aria-label="Лицензия и документы">
+        <p class="smap__h"><a href="#license">01 · Лицензия и документы</a></p>
+        <ul>
+          <li><a href="#license">Лицензия на медицинскую деятельность</a></li>
+          <li><a href="#license">Регистрационные документы</a></li>
+          <li><a href="#schedule">График работы и как добраться</a></li>
+        </ul>
+      </nav>
+
+      <nav class="smap__col" aria-label="Врачи и аккредитация">
+        <p class="smap__h"><a href="#doctors">02 · Врачи и аккредитация</a></p>
+        <ul>
+          <li><a href="#doctors">Специалисты клиники</a></li>
+          <li><a href="#doctors">Сведения об аккредитации</a></li>
+        </ul>
+      </nav>
+
+      <nav class="smap__col" aria-label="Прейскурант">
+        <p class="smap__h"><a href="#prices">03 · Прейскурант</a></p>
+        <ul>
+          <li><a href="#prices">Стоимость платных медицинских услуг</a></li>
+          <li><a href="#prices">Условия и сроки оказания услуг</a></li>
+        </ul>
+      </nav>
+
+      <nav class="smap__col" aria-label="Жалобы и контроль">
+        <p class="smap__h"><a href="#oversight">04 · Жалобы и контроль</a></p>
+        <ul>
+          <li><a href="#oversight">Контролирующие органы</a></li>
+          <li><a href="#oversight">Порядок досудебного обжалования</a></li>
+        </ul>
+      </nav>
+
+      <nav class="smap__col" aria-label="Правовая информация">
+        <p class="smap__h"><a href="#legal">05 · Правовая информация</a></p>
+        <ul>
+          <li><a href="#legal">Документы организации</a></li>
+          <li><a href="#legal">Права и обязанности пациента</a></li>
+          <li><a href="#legal">Стандарты и клинические рекомендации</a></li>
+          <li><a href="#legal">Нормативные акты</a></li>
+        </ul>
+      </nav>
+
+      <nav class="smap__col" aria-label="Документы">
+        <p class="smap__h">Документы (PDF, JPG)</p>
+        <ul>
+          <li><a href="assets/docs/vypiska-reestr-licenzij.pdf" target="_blank" rel="noopener">Выписка из реестра лицензий</a></li>
+          <li><a href="assets/docs/svidetelstvo-ogrn.jpg" target="_blank" rel="noopener">Свидетельство о регистрации (ОГРН)</a></li>
+          <li><a href="assets/docs/svidetelstvo-inn-kpp.jpg" target="_blank" rel="noopener">Свидетельство о налоговом учёте</a></li>
+          <li><a href="assets/docs/vypiska-egrul.pdf" target="_blank" rel="noopener">Выписка из ЕГРЮЛ</a></li>
+          <li><a href="assets/docs/vypiska-akkreditaciya-matveev.pdf" target="_blank" rel="noopener">Выписка об аккредитации специалиста</a></li>
+          <li><a href="assets/docs/dogovor-platnye-uslugi.pdf" target="_blank" rel="noopener">Договор на оказание платных услуг</a></li>
+          <li><a href="assets/docs/dogovor-prilozhenie-1.pdf" target="_blank" rel="noopener">Приложение 1 к договору</a></li>
+          <li><a href="assets/docs/soglasie-pd-i-ids.pdf" target="_blank" rel="noopener">Согласие на обработку данных и ИДС</a></li>
+          <li><a href="assets/docs/politika-personalnye-dannye.pdf" target="_blank" rel="noopener">Политика обработки персональных данных</a></li>
+          <li><a href="assets/docs/pravila-poseshcheniya.pdf" target="_blank" rel="noopener">Правила посещения клиники</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
   </main>
 </div>
 
@@ -730,6 +887,7 @@
         <li><a href="#prices">Прейскурант</a></li>
         <li><a href="#oversight">Жалобы и контроль</a></li>
         <li><a href="#legal">Правовая информация</a></li>
+        <li><a href="#sitemap">Карта сайта</a></li>
       </ul>
     </nav>
 

@@ -1,0 +1,78 @@
+# ==========================================================================
+# Настройки для обычного хостинга (Apache).
+# На GitHub Pages файл не используется — там всё это делается само.
+#
+# Проверьте после заливки:
+#   http://домен      → https://домен          (301)
+#   https://www.домен → https://домен          (301)
+#   https://домен/нет-такой-страницы           → своя страница 404
+# ==========================================================================
+
+# Кириллица в текстовых файлах
+AddDefaultCharset utf-8
+
+# Список файлов каталога наружу не отдаём
+Options -Indexes
+
+# --- Свой обработчик 404 ---
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # --- Только https ---
+  # HTTP_HOST, а не жёстко прописанный домен: файл переживёт переезд.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # --- Один канонический адрес: без www ---
+  # Иначе сайт доступен по двум адресам, и поисковик считает их
+  # разными сайтами с одинаковым содержимым.
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+  # --- /index.html → / ---
+  RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>
+
+# --- Сжатие ---
+# Картинки и PDF уже сжаты, повторно их жать смысла нет.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Кэш ---
+# Документы держим неделю: выписки и договор обновляются, и посетитель
+# не должен неделями видеть старый файл из кэша браузера.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/css                  "access plus 7 days"
+  ExpiresByType application/javascript    "access plus 7 days"
+  ExpiresByType image/svg+xml             "access plus 30 days"
+  ExpiresByType image/jpeg                "access plus 30 days"
+  ExpiresByType image/png                 "access plus 30 days"
+  ExpiresByType application/pdf           "access plus 7 days"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Страница меняется чаще всего — пусть браузер каждый раз спрашивает
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # Сайт ничего не собирает и не отправляет, поэтому запреты дешёвые
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  # Карта Яндекса грузится в <iframe>, поэтому SAMEORIGIN, а не DENY
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# Отсоединённая подпись выписки: пусть скачивается, а не открывается текстом
+<FilesMatch "\.sig$">
+  ForceType application/octet-stream
+</FilesMatch>
