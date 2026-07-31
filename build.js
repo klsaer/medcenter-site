@@ -109,9 +109,19 @@ console.log('    dist/artifact.html  ' + kb('artifact.html'));
   if (!fs.existsSync(p)) { console.log('\n  ! robots.txt отсутствует'); return; }
 
   const closed = /^\s*Disallow:\s*\/\s*$/m.test(read('robots.txt'));
-  console.log('\n  robots.txt: ' + (closed
-    ? 'сайт ЗАКРЫТ от поисковиков — открыть в день сдачи'
-    : 'сайт открыт для индексации'));
+  const noindex = /<meta\s+name="robots"[^>]*noindex/i.test(read('index.html'));
+
+  console.log('\n  Индексация:');
+  console.log('    robots.txt      ' + (closed ? 'ЗАКРЫТ' : 'открыт'));
+  console.log('    meta robots     ' + (noindex ? 'noindex' : 'нет'));
+
+  /* Одного robots.txt мало: он читается только из корня домена, а на
+     GitHub Pages сайт лежит в подпапке. Пока сайт черновик — нужны оба. */
+  if (closed !== noindex) {
+    console.log('    ! расходятся — в день сдачи снимать надо оба сразу');
+  } else if (closed) {
+    console.log('    сайт закрыт от поисковиков — открыть в день сдачи');
+  }
 })();
 
 console.log('');
