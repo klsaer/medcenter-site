@@ -69,4 +69,36 @@ fs.writeFileSync(path.join(DIST, 'artifact.html'), headBits + '\n' + bodyInner.t
 const kb = f => (fs.statSync(path.join(DIST, f)).size / 1024).toFixed(0) + ' КБ';
 console.log('\n  Готово:');
 console.log('    dist/index.html     ' + kb('index.html'));
-console.log('    dist/artifact.html  ' + kb('artifact.html') + '\n');
+console.log('    dist/artifact.html  ' + kb('artifact.html'));
+
+/* --- 5. Сверка графика работы ---
+   Часы указаны в семи местах: таблица, запись на приём, приём руководителя,
+   раздел «Как записаться», подвал, запасное «Сегодня» и массив SCHEDULE.
+   Один раз они уже разъехались, поэтому сборка проверяет их автоматически. */
+(function checkSchedule() {
+  /* .org__note — часы приёма надзорных органов, это чужие организации;
+     их время к графику клиники отношения не имеет и в сверку не идёт */
+  const src = read('index.html').replace(/<span class="org__note">[\s\S]*?<\/span>/g, '');
+  const js = read('assets/js/main.js');
+
+  const norm = s => s.replace(/[–—−]/g, '-').replace(/\s/g, '');
+
+  const inHtml = (src.match(/\d{2}:\d{2}\s*[–—-]\s*\d{2}:\d{2}/g) || []).map(norm);
+  const inJs = (js.match(/'(\d{2}:\d{2}[–—-]\d{2}:\d{2})'/g) || []).map(s => norm(s.replace(/'/g, '')));
+
+  const all = inHtml.concat(inJs);
+  const uniq = [...new Set(all)];
+
+  console.log('\n  График работы: ' + inHtml.length + ' мест в HTML + ' + inJs.length + ' в SCHEDULE');
+
+  if (uniq.length === 1) {
+    console.log('    все совпадают — ' + uniq[0]);
+  } else {
+    console.log('    ! РАСХОЖДЕНИЕ, встречаются разные значения:');
+    uniq.forEach(v => console.log('      ' + v + '  ×' + all.filter(x => x === v).length));
+    console.log('    Проверьте список мест в CONTENT.md, раздел «График работы».');
+    process.exitCode = 1;
+  }
+})();
+
+console.log('');
