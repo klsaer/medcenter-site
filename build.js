@@ -10,18 +10,60 @@
    ========================================================================== */
 'use strict';
 
-const fs   = require('fs');
-const path = require('path');
+const fs     = require('fs');
+const path   = require('path');
+const crypto = require('crypto');
 
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
 
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 
+/* --- 0. Метки версий у ссылок на файлы ---
+   Timeweb отдаёт статику через nginx с Cache-Control: max-age=31536000,
+   то есть на ГОД, и переопределить это из .htaccess нельзя — nginx
+   обрабатывает такие запросы сам. Без метки обновлённый файл дошёл бы
+   до вернувшегося посетителя через год: и новые стили, и — что хуже —
+   новая редакция договора или прейскуранта.
+
+   Метка — восемь символов хэша содержимого. Меняется файл — меняется
+   адрес — браузер скачивает заново. Правится прямо в исходниках,
+   потому что именно они уезжают на хостинг. */
+(function stampVersions() {
+  const RE = /(href|src)="(\/?)(assets\/[^"?]+)(\?v=[0-9a-f]+)?"/g;
+  const changed = [];
+
+  ['index.html', '404.html'].forEach(file => {
+    const abs = path.join(ROOT, file);
+    if (!fs.existsSync(abs)) return;
+
+    const before = fs.readFileSync(abs, 'utf8');
+    const after = before.replace(RE, (m, attr, slash, rel, old) => {
+      const target = path.join(ROOT, rel);
+      if (!fs.existsSync(target)) {
+        console.warn('  ! нет файла, метка не проставлена: ' + rel);
+        return m;
+      }
+      const hash = crypto.createHash('sha1')
+        .update(fs.readFileSync(target)).digest('hex').slice(0, 8);
+      if (old !== '?v=' + hash) changed.push(rel + '  ' + (old || '(не было)') + ' → ?v=' + hash);
+      return `${attr}="${slash}${rel}?v=${hash}"`;
+    });
+
+    if (after !== before) fs.writeFileSync(abs, after);
+  });
+
+  if (changed.length) {
+    console.log('\n  Обновлены метки версий (' + changed.length + '):');
+    changed.forEach(c => console.log('    ' + c));
+  }
+})();
+
 let html = read('index.html');
 
-/* --- 1. Картинки → data: URI --- */
-html = html.replace(/src="(assets\/img\/[^"]+)"/g, (m, rel) => {
+/* --- 1. Картинки → data: URI ---
+   Метку ?v= отбрасываем: на диске файл лежит без неё. */
+html = html.replace(/src="(assets\/img\/[^"?]+)(\?v=[0-9a-f]+)?"/g, (m, rel) => {
   const abs = path.join(ROOT, rel);
   if (!fs.existsSync(abs)) {
     console.warn('  ! пропущен (нет файла): ' + rel);
@@ -38,13 +80,13 @@ html = html.replace(/src="(assets\/img\/[^"]+)"/g, (m, rel) => {
    Замена только функцией: в строке-замене $$ и $& трактуются как спецпоследовательности
    и молча портят код (в main.js есть хелпер $$). */
 html = html.replace(
-  /<link rel="stylesheet" href="assets\/css\/styles\.css">/,
+  /<link rel="stylesheet" href="assets\/css\/styles\.css(\?v=[0-9a-f]+)?">/,
   () => '<style>\n' + read('assets/css/styles.css') + '\n</style>'
 );
 
 /* --- 3. JS внутрь --- */
 html = html.replace(
-  /<script src="assets\/js\/main\.js"><\/script>/,
+  /<script src="assets\/js\/main\.js(\?v=[0-9a-f]+)?"><\/script>/,
   () => '<script>\n' + read('assets/js/main.js') + '\n</script>'
 );
 
