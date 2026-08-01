@@ -51,18 +51,6 @@
 
 <a class="skip-link" href="#content">Перейти к содержанию</a>
 
-<!-- ============================================================
-     Сайт в работе. Незаполненные места помечены атрибутом data-fill
-     и подсвечиваются кнопкой «Показать заглушки».
-     Что осталось собрать — см. CONTENT.md.
-     Перед сдачей клиенту удалить блок .template-banner ниже.
-     ============================================================ -->
-<div class="template-banner" role="note">
-  <strong>Сайт в работе.</strong> Реквизиты, лицензия, прейскурант, аккредитация врача,
-  телефон и контакты надзорных органов — настоящие. Логотип, фото и часть документов — заглушки.
-  <button type="button" class="banner-btn" id="fillToggle" aria-pressed="false">Показать заглушки</button>
-</div>
-
 <!-- ── Утилитарная строка: то, что регулятор ищет первым делом ── -->
 <div class="utilbar">
   <div class="wrap utilbar__in">
@@ -84,8 +72,9 @@
   <div class="wrap masthead__in">
 
     <a class="brand" href="#top" aria-label="На главную">
-      <!-- ЗАМЕНИТЬ на логотип в кривых (SVG). Высота задаётся CSS, viewBox сохранить пропорциональным. -->
-      <svg class="brand__mark" viewBox="0 0 40 40" role="img" aria-hidden="true" data-fill>
+      <!-- Временный знак. ЗАМЕНИТЬ на логотип в кривых (SVG), когда пришлют:
+           высота задаётся CSS, viewBox сохранить пропорциональным. -->
+      <svg class="brand__mark" viewBox="0 0 40 40" role="img" aria-hidden="true">
         <rect x="0.75" y="0.75" width="38.5" height="38.5" rx="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
         <path d="M16.5 9h7v7.5H31v7h-7.5V31h-7v-7.5H9v-7h7.5z" fill="currentColor"/>
       </svg>

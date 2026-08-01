@@ -403,21 +403,6 @@
     render('');
   })();
 
-  /* ---------- Режим «показать заглушки» ---------- */
-  (function fillMode() {
-    var btn = $('#fillToggle');
-    if (!btn) return;
-
-    var n = $$('[data-fill]').length;
-    btn.textContent = 'Показать заглушки (' + n + ')';
-
-    btn.addEventListener('click', function () {
-      var on = document.body.classList.toggle('show-fill');
-      btn.setAttribute('aria-pressed', String(on));
-      btn.textContent = (on ? 'Скрыть заглушки (' : 'Показать заглушки (') + n + ')';
-    });
-  })();
-
   /* ---------- Карта: включаем взаимодействие только по щелчку ----------
      Иначе на телефоне палец внутри карты тянет карту, а не страницу,
      и посетитель застревает на этом блоке. */

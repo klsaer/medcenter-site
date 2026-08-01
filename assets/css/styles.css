@@ -149,36 +149,7 @@ a:hover { text-decoration-color: currentColor; }
 
 .wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
 
-/* ---------- 3. Баннер шаблона + режим заглушек ---------- */
-.template-banner {
-  background: var(--navy-soft);
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
-  font-size: .85rem;
-  padding: 9px clamp(16px, 4vw, 40px);
-  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
-}
-.template-banner strong { color: var(--navy); }
-.banner-btn {
-  margin-left: auto;
-  font: 600 .8rem/1 var(--f-sans);
-  color: var(--navy);
-  background: transparent;
-  border: 1px solid color-mix(in srgb, var(--navy) 40%, transparent);
-  padding: 6px 12px; border-radius: 100px; cursor: pointer;
-  transition: background .15s, color .15s;
-}
-.banner-btn:hover { background: var(--navy); color: var(--surface); }
-.banner-btn[aria-pressed="true"] { background: var(--navy); color: var(--surface); }
-
-body.show-fill [data-fill] {
-  outline: 1px dashed color-mix(in srgb, var(--warn) 65%, transparent);
-  outline-offset: 2px;
-  background: color-mix(in srgb, var(--warn-soft) 70%, transparent);
-  border-radius: 3px;
-}
-
-/* ---------- 4. Утилитарная строка ---------- */
+/* ---------- 3. Утилитарная строка ---------- */
 .utilbar {
   background: var(--primary);
   color: color-mix(in srgb, var(--primary-on) 88%, transparent);
@@ -882,7 +853,6 @@ body.srch-open { overflow: hidden; }
 :root[data-vi] .burger { display: none; }
 :root[data-vi] .theme-btn { display: none; }
 :root[data-vi] #viBtn { display: grid; }
-:root[data-vi] .template-banner { display: none; }
 /* карта — картинка, в этом режиме от неё нет пользы, а тянет 300 КБ */
 :root[data-vi] .mapbox { display: none; }
 /* декоративный градиент карточки даёт серый налёт под текстом — гасим */
@@ -914,7 +884,6 @@ body.srch-open { overflow: hidden; }
 /* у .btn стоит white-space: nowrap — на крупном шрифте «Лицензия
    и документы» не влезала в 390 px и толкала страницу вбок */
 :root[data-vi] .btn { white-space: normal; text-align: center; }
-:root[data-vi] .dr__ph { display: none; }
 
 /* Все ссылки подчёркнуты: цветом их в одноцветной схеме не отличить */
 :root[data-vi] a { text-decoration: underline; text-decoration-color: currentColor; }
@@ -926,7 +895,9 @@ body.srch-open { overflow: hidden; }
 :root[data-vi] .laws li { border: 1px solid var(--line) !important; box-shadow: none !important; }
 
 :root[data-vi][data-vi-space="1"] body { letter-spacing: .06em; word-spacing: .14em; line-height: 1.9; }
+/* .dr__ph прячем целиком: без картинки остался бы пустой цветной кружок */
 :root[data-vi][data-vi-img="off"] img,
+:root[data-vi][data-vi-img="off"] .dr__ph,
 :root[data-vi][data-vi-img="off"] .qr,
 :root[data-vi][data-vi-img="off"] .brand__mark { display: none; }
 
@@ -955,7 +926,7 @@ body.srch-open { overflow: hidden; }
 /* ---------- 21. Печать ---------- */
 @media print {
   /* .sec--cta печатаем: там контакты для записи, а не форма */
-  .utilbar, .masthead, .rail, .template-banner, .theme-btn, .pricetools,
+  .utilbar, .masthead, .rail, .theme-btn, .pricetools,
   .vip, .srch, .sec--map { display: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .doc, .dr, .qa, .docs__i a { box-shadow: none; border: 1px solid #999; break-inside: avoid; }
