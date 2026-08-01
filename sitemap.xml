@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Сайт одностраничный, поэтому в карте один адрес — канонический, без www.
+     Пока robots.txt закрывает сайт от индексации, этот файл не используется:
+     он понадобится в день запуска. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://klinika-matveeva.ru/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+</urlset>
