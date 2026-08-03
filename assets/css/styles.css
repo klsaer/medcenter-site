@@ -667,6 +667,19 @@ a:hover { text-decoration-color: currentColor; }
   border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
   border-radius: 100px; padding: 1px 8px;
 }
+/* Акт, который уже не действует. Тон нейтральный, не красный: это не
+   ошибка, а архивная редакция — она лежит на сайте намеренно, рядом
+   с заменившим её актом, и пометка нужна лишь чтобы их не спутали. */
+.laws__past {
+  display: inline-block; margin-left: 6px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .02em;
+  color: var(--ink-3); background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 100px; padding: 1px 8px;
+}
+/* Название утратившего силу акта — приглушённое и перечёркнутое поверх
+   собственного подчёркивания-ссылки: понятно с одного взгляда, до чтения. */
+.laws__t:has(.laws__past) a { color: var(--ink-3); text-decoration-line: underline line-through; }
 
 /* ---------- 15. Запись ---------- */
 .sec--cta { border-top: 0; }
@@ -916,6 +929,10 @@ body.srch-open { overflow: hidden; }
 
 /* Все ссылки подчёркнуты: цветом их в одноцветной схеме не отличить */
 :root[data-vi] a { text-decoration: underline; text-decoration-color: currentColor; }
+/* Правило выше — сокращённое `text-decoration`, оно сбрасывало перечёркивание
+   у актов, утративших силу. В одноцветной схеме это единственный признак,
+   кроме пометки, поэтому возвращаем его отдельно. */
+:root[data-vi] .laws__t:has(.laws__past) a { text-decoration-line: underline line-through; }
 :root[data-vi] .doc,
 :root[data-vi] .dr,
 :root[data-vi] .qa,
