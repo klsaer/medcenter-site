@@ -150,8 +150,10 @@ console.log('    dist/artifact.html  ' + kb('artifact.html'));
   const p = path.join(ROOT, 'robots.txt');
   if (!fs.existsSync(p)) { console.log('\n  ! robots.txt отсутствует'); return; }
 
-  const closed = /^\s*Disallow:\s*\/\s*$/m.test(read('robots.txt'));
+  const robots = read('robots.txt');
+  const closed = /^\s*Disallow:\s*\/\s*$/m.test(robots);
   const noindex = /<meta\s+name="robots"[^>]*noindex/i.test(read('index.html'));
+  const sitemap = /^\s*Sitemap:\s*https?:\/\/\S+/m.test(robots);
 
   console.log('\n  Индексация:');
   console.log('    robots.txt      ' + (closed ? 'ЗАКРЫТ' : 'открыт'));
@@ -160,9 +162,14 @@ console.log('    dist/artifact.html  ' + kb('artifact.html'));
   /* Одного robots.txt мало: он читается только из корня домена, а на
      GitHub Pages сайт лежит в подпапке. Пока сайт черновик — нужны оба. */
   if (closed !== noindex) {
-    console.log('    ! расходятся — в день сдачи снимать надо оба сразу');
+    console.log('    ! расходятся — снимать и ставить надо оба сразу');
   } else if (closed) {
     console.log('    сайт закрыт от поисковиков — открыть в день сдачи');
+  } else {
+    console.log('    сайт открыт для поисковиков');
+    /* Карту сайта поисковик сам не найдёт: на неё нет ссылок со страницы,
+       единственный указатель — строка Sitemap в robots.txt. */
+    if (!sitemap) console.log('    ! в robots.txt нет строки Sitemap — карту сайта никто не найдёт');
   }
 })();
 
